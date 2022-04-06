@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otel.Launcher.Tracing", "Otel.Launcher.Tracing\Otel.Launcher.Tracing.csproj", "{616A57C2-D29B-4B4D-BBDB-49EC1E634205}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otel.Launcher.UnitTests", "Otel.Launcher.UnitTests\Otel.Launcher.UnitTests.csproj", "{87392CF5-CECB-4E40-A7B1-7AE8A40DB173}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{616A57C2-D29B-4B4D-BBDB-49EC1E634205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{616A57C2-D29B-4B4D-BBDB-49EC1E634205}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{616A57C2-D29B-4B4D-BBDB-49EC1E634205}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{616A57C2-D29B-4B4D-BBDB-49EC1E634205}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87392CF5-CECB-4E40-A7B1-7AE8A40DB173}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87392CF5-CECB-4E40-A7B1-7AE8A40DB173}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87392CF5-CECB-4E40-A7B1-7AE8A40DB173}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87392CF5-CECB-4E40-A7B1-7AE8A40DB173}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
