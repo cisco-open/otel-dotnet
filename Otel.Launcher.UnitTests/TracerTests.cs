@@ -13,13 +13,13 @@ public class TracerTests
     }
 
     [Test]
-    public async Task HappyFlowTest()
+    public void HappyPathTest()
     {
         try
         {
             Tracing.Trace.Init();
-        
-            await new HttpClient().GetStringAsync("https://example.com/");
+
+            new HttpClient().GetStringAsync("https://example.com").Wait();
         }
         catch (Exception e)
         {
