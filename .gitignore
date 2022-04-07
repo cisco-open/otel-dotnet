@@ -1,0 +1,11 @@
+# User-specific files
+*.user
+
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+
+# JetBrains Rider
+.idea/
