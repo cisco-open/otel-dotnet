@@ -1,5 +1,4 @@
 using System;
-using System.Net.Http;
 using NUnit.Framework;
 using Otel.Launcher.Tracing;
 
@@ -7,11 +6,6 @@ namespace Otel.Launcher.UnitTests;
 
 public class TracerTests
 {
-    [SetUp]
-    public void Setup()
-    {
-    }
-
     [Test]
     public void HappyPathTest()
     {
@@ -23,9 +17,13 @@ public class TracerTests
                     new ExporterOptions.Console()
                 });
 
-            Trace.Init(options);
+            var tracerProvider = Trace.Init(options);
 
-            new HttpClient().GetStringAsync("https://example.com").Wait();
+            var tracer = tracerProvider.GetTracer(options.ServiceName);
+            
+            using var span = tracer.StartActiveSpan("HappyPathSpan");
+            
+            span.SetAttribute("test_attribute", 123);
         }
         catch (Exception e)
         {

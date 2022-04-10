@@ -4,65 +4,67 @@ using OpenTelemetry.Trace;
 
 namespace Otel.Launcher.Tracing;
 
-    public static class TracerProviderBuilderExtensions
+public static class TracerProviderBuilderExtensions
+{
+    public static TracerProviderBuilder AddCiscoTracing(this TracerProviderBuilder builder, CiscoOptions options)
     {
-        public static TracerProviderBuilder AddCiscoTracing(this TracerProviderBuilder builder, CiscoOptions options)
+        if (options is null)
         {
-            if (options is null)
-            {
-                throw new ArgumentNullException(nameof(options), "No options have been set in appsettings.json or environment variables.");
-            }
+            throw new ArgumentNullException(nameof(options),
+                "No options have been set in appsettings.json or environment variables.");
+        }
 
-            builder
-                .SetResourceBuilder(
-                    ResourceBuilder.CreateDefault()
-                        .AddService(options.ServiceName));
+        builder
+            .AddSource(options.ServiceName)
+            .SetResourceBuilder(
+                ResourceBuilder.CreateDefault()
+                    .AddService(options.ServiceName));
 
-            foreach (var exporterOption in options.ExporterOptions)
+        foreach (var exporterOption in options.ExporterOptions)
+        {
+            switch (exporterOption)
             {
-                switch (exporterOption)
-                {
-                    case ExporterOptions.Console:
-                        builder.AddConsoleExporter();
-                        break;
-                    case ExporterOptions.OltpGrpc oltpGrpc:
-                        builder.AddOtlpExporter(opts =>
+                case ExporterOptions.Console:
+                    builder.AddConsoleExporter();
+                    break;
+                case ExporterOptions.OtlpGrpc oltpGrpc:
+                    builder.AddOtlpExporter(opts =>
+                    {
+                        if (oltpGrpc.CollectorEndpoint != null)
                         {
-                            if (oltpGrpc.CollectorEndpoint != null)
-                            {
-                                opts.Endpoint = new Uri(oltpGrpc.CollectorEndpoint);
-                            }
+                            opts.Endpoint = new Uri(oltpGrpc.CollectorEndpoint);
+                        }
 
-                            opts.Protocol = OtlpExportProtocol.Grpc;
-                            opts.Headers = $"{Constants.TokenHeader}={oltpGrpc.CiscoToken}";
-                        });
-                        break;
-                    case ExporterOptions.OltpHttp oltpHttp:
-                        builder.AddOtlpExporter(opts =>
+                        opts.Protocol = OtlpExportProtocol.Grpc;
+                        opts.Headers = $"{Constants.TokenHeader}={oltpGrpc.CiscoToken}";
+                    });
+                    break;
+                case ExporterOptions.OtlpHttp oltpHttp:
+                    builder.AddOtlpExporter(opts =>
+                    {
+                        if (oltpHttp.CollectorEndpoint != null)
                         {
-                            if (oltpHttp.CollectorEndpoint != null)
-                            {
-                                opts.Endpoint = new Uri(oltpHttp.CollectorEndpoint);
-                            }
+                            opts.Endpoint = new Uri(oltpHttp.CollectorEndpoint);
+                        }
 
-                            opts.Protocol = OtlpExportProtocol.HttpProtobuf;
-                            opts.Headers = $"{Constants.TokenHeader}={oltpHttp.CiscoToken}";
-                        });
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(exporterOption));
-                }
+                        opts.Protocol = OtlpExportProtocol.HttpProtobuf;
+                        opts.Headers = $"{Constants.TokenHeader}={oltpHttp.CiscoToken}";
+                    });
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(exporterOption));
             }
-            
-            if (options.InstrumentHttpClient)
-            {
-                builder.AddHttpClientInstrumentation();
-            }
+        }
 
-            if (options.InstrumentSqlClient)
-            {
-                builder.AddSqlClientInstrumentation();
-            }
+        if (options.InstrumentHttpClient)
+        {
+            builder.AddHttpClientInstrumentation();
+        }
+
+        if (options.InstrumentSqlClient)
+        {
+            builder.AddSqlClientInstrumentation();
+        }
 
 #if NET461
             builder.AddAspNetInstrumentation();
@@ -76,6 +78,6 @@ namespace Otel.Launcher.Tracing;
             }
 #endif
 
-            return builder;
-        }
+        return builder;
+    }
 }

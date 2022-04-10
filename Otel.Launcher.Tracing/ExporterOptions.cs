@@ -6,26 +6,28 @@ public abstract class ExporterOptions
     {
     }
 
-    public class OltpHttp : ExporterOptions
+    public class OtlpHttp : ExporterOptions
     {
-        public OltpHttp(string ciscoToken, string? collectorEndpoint = null)
+        public OtlpHttp(string ciscoToken, string? collectorEndpoint = null)
         {
-            CiscoToken = ciscoToken;
+            CiscoToken = ciscoToken ??
+                         throw new ArgumentException("Cisco Token cannot be null");
             CollectorEndpoint = collectorEndpoint;
         }
-        
+
         public string CiscoToken { get; }
         public string? CollectorEndpoint { get; }
     }
 
-    public class OltpGrpc : ExporterOptions
+    public class OtlpGrpc : ExporterOptions
     {
-        public OltpGrpc(string ciscoToken, string? collectorEndpoint = null)
+        public OtlpGrpc(string ciscoToken, string? collectorEndpoint = null)
         {
-            CiscoToken = ciscoToken;
+            CiscoToken = ciscoToken ??
+                         throw new ArgumentException("Cisco Token cannot be null");
             CollectorEndpoint = collectorEndpoint;
         }
-        
+
         public string CiscoToken { get; }
         public string? CollectorEndpoint { get; }
     }
