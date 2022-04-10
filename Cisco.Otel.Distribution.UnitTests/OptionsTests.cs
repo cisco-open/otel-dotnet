@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Otel.Launcher.Tracing;
+using Cisco.Otel.Distribution.Tracing;
 
-namespace Otel.Launcher.UnitTests;
+namespace Cisco.Otel.Distribution.UnitTests;
 
 public class OptionsTests
 {
@@ -35,13 +35,13 @@ public class OptionsTests
     {
         Assert.Throws<ArgumentException>(() =>
             {
-                var otlpGrpc = new ExporterOptions.OtlpGrpc(null);
+                var otlpGrpc = new ExporterOptions.OtlpGrpc(string.Empty);
             },
             "Cisco Token cannot be null");
 
         Assert.Throws<ArgumentException>(() =>
             {
-                var otlpHttp = new ExporterOptions.OtlpHttp(null);
+                var otlpHttp = new ExporterOptions.OtlpHttp(string.Empty);
             },
             "Cisco Token cannot be null");
     }

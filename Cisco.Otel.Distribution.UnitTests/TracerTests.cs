@@ -1,8 +1,8 @@
 using System;
 using NUnit.Framework;
-using Otel.Launcher.Tracing;
+using Cisco.Otel.Distribution.Tracing;
 
-namespace Otel.Launcher.UnitTests;
+namespace Cisco.Otel.Distribution.UnitTests;
 
 public class TracerTests
 {

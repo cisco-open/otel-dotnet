@@ -1,7 +1,7 @@
 ﻿using OpenTelemetry;
 using OpenTelemetry.Trace;
 
-namespace Otel.Launcher.Tracing;
+namespace Cisco.Otel.Distribution.Tracing;
 
 public static class Trace
 {
