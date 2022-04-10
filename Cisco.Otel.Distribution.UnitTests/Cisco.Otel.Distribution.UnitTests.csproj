@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Otel.Launcher.Tracing\Otel.Launcher.Tracing.csproj" />
+      <ProjectReference Include="..\Cisco.Otel.Distribution.Tracing\Cisco.Otel.Distribution.Tracing.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-namespace Otel.Launcher.Tracing;
+namespace Cisco.Otel.Distribution.Tracing;
 
 public class CiscoOptions
 {

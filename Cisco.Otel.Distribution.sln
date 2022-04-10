@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otel.Launcher.Tracing", "Otel.Launcher.Tracing\Otel.Launcher.Tracing.csproj", "{616A57C2-D29B-4B4D-BBDB-49EC1E634205}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cisco.Otel.Distribution.Tracing", "Cisco.Otel.Distribution.Tracing\Cisco.Otel.Distribution.Tracing.csproj", "{616A57C2-D29B-4B4D-BBDB-49EC1E634205}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otel.Launcher.UnitTests", "Otel.Launcher.UnitTests\Otel.Launcher.UnitTests.csproj", "{87392CF5-CECB-4E40-A7B1-7AE8A40DB173}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cisco.Otel.Distribution.UnitTests", "Cisco.Otel.Distribution.UnitTests\Cisco.Otel.Distribution.UnitTests.csproj", "{87392CF5-CECB-4E40-A7B1-7AE8A40DB173}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
