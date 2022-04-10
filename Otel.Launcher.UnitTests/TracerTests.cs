@@ -1,30 +1,33 @@
 using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using NUnit.Framework;
+using Otel.Launcher.Tracing;
 
 namespace Otel.Launcher.UnitTests;
 
 public class TracerTests
 {
-    [SetUp]
-    public void Setup()
-    {
-    }
-
     [Test]
-    public async Task HappyFlowTest()
+    public void HappyPathTest()
     {
         try
         {
-            Tracing.Trace.Init();
-        
-            await new HttpClient().GetStringAsync("https://example.com/");
+            var options = new CiscoOptions(
+                new[]
+                {
+                    new ExporterOptions.Console()
+                });
+
+            var tracerProvider = Trace.Init(options);
+
+            var tracer = tracerProvider.GetTracer(options.ServiceName);
+            
+            using var span = tracer.StartActiveSpan("HappyPathSpan");
+            
+            span.SetAttribute("test_attribute", 123);
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            
             Assert.Fail(e.Message);
         }
     }

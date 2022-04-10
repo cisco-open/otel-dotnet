@@ -1,16 +1,15 @@
-﻿namespace Otel.Launcher.Tracing;
-
-using OpenTelemetry;
+﻿using OpenTelemetry;
 using OpenTelemetry.Trace;
+
+namespace Otel.Launcher.Tracing;
 
 public static class Trace
 {
-    public static void Init()
+    public static TracerProvider Init(CiscoOptions options)
     {
-        Sdk.CreateTracerProviderBuilder()
-            .AddHttpClientInstrumentation()
-            .AddOtlpExporter()
-            .AddConsoleExporter()
-            .Build();
+        return 
+            Sdk.CreateTracerProviderBuilder()
+                .AddCiscoTracing(options)
+                .Build();
     }
-}   
+}
