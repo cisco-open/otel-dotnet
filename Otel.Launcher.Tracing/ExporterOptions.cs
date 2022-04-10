@@ -8,26 +8,26 @@ public abstract class ExporterOptions
 
     public class OltpHttp : ExporterOptions
     {
-        public OltpHttp(Uri collectorEndpoint, string ciscoToken)
+        public OltpHttp(string ciscoToken, string? collectorEndpoint = null)
         {
-            CollectorEndpoint = collectorEndpoint;
             CiscoToken = ciscoToken;
+            CollectorEndpoint = collectorEndpoint;
         }
-
-        public Uri CollectorEndpoint { get; }
+        
         public string CiscoToken { get; }
+        public string? CollectorEndpoint { get; }
     }
 
     public class OltpGrpc : ExporterOptions
     {
-        public OltpGrpc(Uri collectorEndpoint, string ciscoToken)
+        public OltpGrpc(string ciscoToken, string? collectorEndpoint = null)
         {
-            CollectorEndpoint = collectorEndpoint;
             CiscoToken = ciscoToken;
+            CollectorEndpoint = collectorEndpoint;
         }
-
-        public Uri CollectorEndpoint { get; }
+        
         public string CiscoToken { get; }
+        public string? CollectorEndpoint { get; }
     }
 
     public class Console : ExporterOptions

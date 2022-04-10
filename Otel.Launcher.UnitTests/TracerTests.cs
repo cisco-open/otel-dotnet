@@ -17,8 +17,7 @@ public class TracerTests
     {
         try
         {
-            var options = new Options(
-                "dotnet-test",
+            var options = new CiscoOptions(
                 new[]
                 {
                     new ExporterOptions.Console()
