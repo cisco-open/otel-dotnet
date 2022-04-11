@@ -1,6 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using NUnit.Framework;
 using Cisco.Otel.Distribution.Tracing;
+using Trace = Cisco.Otel.Distribution.Tracing.Trace;
 
 namespace Cisco.Otel.Distribution.UnitTests;
 
@@ -9,26 +13,23 @@ public class TracerTests
     [Test]
     public void HappyPathTest()
     {
-        try
-        {
-            var options = new CiscoOptions(
-                new[]
-                {
-                    new ExporterOptions.Console()
-                });
-
-            var tracerProvider = Trace.Init(options);
-
-            var tracer = tracerProvider.GetTracer(options.ServiceName);
+        var exportedItems = new List<Activity>();
             
-            using var span = tracer.StartActiveSpan("HappyPathSpan");
-            
-            span.SetAttribute("test_attribute", 123);
-        }
-        catch (Exception e)
+        var options = new CiscoOptions(
+            new[]
+            {
+                new ExporterOptions.InMemory(exportedItems)
+            });
+
+        var tracerProvider = Trace.Init(options);
+
+        var tracer = tracerProvider.GetTracer(options.ServiceName);
+
+        using (tracer.StartActiveSpan("HappyPathSpan"))
         {
-            Console.WriteLine(e);
-            Assert.Fail(e.Message);
         }
+
+        Assert.AreEqual(1, exportedItems.Count);
+        Assert.AreEqual("HappyPathSpan", exportedItems.First().DisplayName);
     }
 }
