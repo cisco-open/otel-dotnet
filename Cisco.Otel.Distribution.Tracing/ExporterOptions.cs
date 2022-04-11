@@ -1,4 +1,4 @@
-namespace Otel.Launcher.Tracing;
+namespace Cisco.Otel.Distribution.Tracing;
 
 public abstract class ExporterOptions
 {
@@ -10,8 +10,10 @@ public abstract class ExporterOptions
     {
         public OtlpHttp(string ciscoToken, string? collectorEndpoint = null)
         {
-            CiscoToken = ciscoToken ??
-                         throw new ArgumentException("Cisco Token cannot be null");
+            CiscoToken = 
+                string.IsNullOrEmpty(ciscoToken)
+                    ? throw new ArgumentException("Cisco Token cannot be null")
+                    : ciscoToken;
             CollectorEndpoint = collectorEndpoint;
         }
 
@@ -23,8 +25,10 @@ public abstract class ExporterOptions
     {
         public OtlpGrpc(string ciscoToken, string? collectorEndpoint = null)
         {
-            CiscoToken = ciscoToken ??
-                         throw new ArgumentException("Cisco Token cannot be null");
+            CiscoToken = 
+                string.IsNullOrEmpty(ciscoToken)
+                    ? throw new ArgumentException("Cisco Token cannot be null")
+                    : ciscoToken;
             CollectorEndpoint = collectorEndpoint;
         }
 
