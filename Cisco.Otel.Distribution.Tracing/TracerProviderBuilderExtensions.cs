@@ -27,6 +27,9 @@ public static class TracerProviderBuilderExtensions
                 case ExporterOptions.Console:
                     builder.AddConsoleExporter();
                     break;
+                case ExporterOptions.InMemory inMemory:
+                    builder.AddInMemoryExporter(inMemory.ExportedItems);
+                    break;
                 case ExporterOptions.OtlpGrpc oltpGrpc:
                     builder.AddOtlpExporter(opts =>
                     {

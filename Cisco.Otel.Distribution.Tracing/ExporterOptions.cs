@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace Cisco.Otel.Distribution.Tracing;
 
 public abstract class ExporterOptions
@@ -36,6 +38,16 @@ public abstract class ExporterOptions
         public string? CollectorEndpoint { get; }
     }
 
+    public class InMemory : ExporterOptions
+    {
+        public InMemory(ICollection<Activity> exportedItems)
+        {
+            ExportedItems = exportedItems;
+        }
+        
+        public ICollection<Activity> ExportedItems { get; }
+    }
+    
     public class Console : ExporterOptions
     {
     }
