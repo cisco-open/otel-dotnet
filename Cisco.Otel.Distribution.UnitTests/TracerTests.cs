@@ -16,9 +16,9 @@ public class TracerTests
         var exportedItems = new List<Activity>();
             
         var options = new CiscoOptions(
-            new[]
+            new ExporterOptions[]
             {
-                // new ExporterOptions.InMemory(exportedItems),
+                new ExporterOptions.InMemory(exportedItems),
                 new ExporterOptions.Console()
             });
 
