@@ -18,7 +18,8 @@ public class TracerTests
         var options = new CiscoOptions(
             new[]
             {
-                new ExporterOptions.InMemory(exportedItems)
+                // new ExporterOptions.InMemory(exportedItems),
+                new ExporterOptions.Console()
             });
 
         var tracerProvider = Trace.Init(options);

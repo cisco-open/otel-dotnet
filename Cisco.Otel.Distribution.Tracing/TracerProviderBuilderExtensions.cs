@@ -59,26 +59,16 @@ public static class TracerProviderBuilderExtensions
             }
         }
 
-        if (options.InstrumentHttpClient)
-        {
-            builder.AddHttpClientInstrumentation();
-        }
-
-        if (options.InstrumentSqlClient)
-        {
-            builder.AddSqlClientInstrumentation();
-        }
+        builder.AddHttpClientInstrumentation();
+        builder.AddSqlClientInstrumentation();
 
 #if NET461
             builder.AddAspNetInstrumentation();
 #endif
 
 #if NETSTANDARD2_1
-            if (options.InstrumentGrpcClient && options.InstrumentHttpClient) // HttpClient needs to be instrumented for GrpcClient instrumentation to work.
-            {
-                // See https://github.com/open-telemetry/opentelemetry-dotnet/blob/main/src/OpenTelemetry.Instrumentation.GrpcNetClient/README.md#suppressdownstreaminstrumentation
-                builder.AddGrpcClientInstrumentation(options => options.SuppressDownstreamInstrumentation = true);
-            }
+        // See https://github.com/open-telemetry/opentelemetry-dotnet/blob/main/src/OpenTelemetry.Instrumentation.GrpcNetClient/README.md#suppressdownstreaminstrumentation
+        builder.AddGrpcClientInstrumentation(options => options.SuppressDownstreamInstrumentation = true);
 #endif
 
         return builder;

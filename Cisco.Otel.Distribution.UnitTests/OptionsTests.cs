@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Cisco.Otel.Distribution.Tracing;
 
@@ -10,12 +11,7 @@ public class OptionsTests
     [Test]
     public void OptionsDefaultsTest()
     {
-        var exporterOptions = new List<ExporterOptions>
-        {
-            new ExporterOptions.Console()
-        };
-
-        var options = new CiscoOptions(exporterOptions);
+        var options = new CiscoOptions(new List<ExporterOptions>{ new ExporterOptions.Console()});
 
         Assert.AreEqual(Constants.DefaultServiceName, options.ServiceName);
     }
