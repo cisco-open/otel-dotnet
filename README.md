@@ -50,7 +50,7 @@ There are multiple ways of configuring the Cisco.Otel.Distribution distro. By ma
 |-|-|-|-|
 |`CISCO_TOKEN`|CiscoOptions.CiscoToken|-|`required` The Cisco account token|
 |`OTEL_SERVICE_NAME`|CiscoOptions.ServiceName|`application`|`optional` The application name that will be set for traces|
-|`OTEL_EXPORTER_TYPE`|CiscoOptions.ExporterOptions.Type|`otlp-grpc`|`optional` The exporter type to use. Multiple exporter option available via the Init method see example below|
+|`OTEL_EXPORTER_TYPE`|CiscoOptions.ExporterOptions.Type|`otlp-grpc`|`optional` The exporter types to use. Multiple exporter options available via IConfiguration instances and the Init method, see example below|
 |`OTEL_COLLECTOR_ENDPOINT`|CiscoOptions.ExporterOptions.Endpoint|`http://localhost:4317`|`optional` The address of the trace collector to send traces to|
 
 
@@ -60,10 +60,12 @@ Using appsettings.json:
   "CiscoOptions": {
     "ServiceName": "my-application",
     "CiscoToken" : "my-cisco-token",
-    "ExporterOptions": {
-      "Type": "otlp-grpc",
-      "Endpoint": "http://localhost:4317"
-    }
+    "ExporterOptions": [
+      {
+        "Type": "otlp-grpc",
+        "Endpoint": "http://localhost:4317"
+      }
+    ]
   }
 }
 ```
