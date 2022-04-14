@@ -18,4 +18,10 @@
       <ProjectReference Include="..\Cisco.Otel.Distribution.Tracing\Cisco.Otel.Distribution.Tracing.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="appsettings.test.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
