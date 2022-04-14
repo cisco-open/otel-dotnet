@@ -13,6 +13,8 @@ You can add the package to your application by using the following command:
 
 To use the Cisco.Otel.Distribution distro with a .NET console application, add the following to the start of the application:
 ```c#
+using Cisco.Otel.Distribution.Tracing;
+
 var options = 
     new CiscoOptions(
         new ExporterOptions[]
@@ -27,6 +29,8 @@ var tracerProvider = Trace.Init(options);
 
 To use the Cisco.Otel.Distribution distro with a .NET Core web application, add the following to the `Startup.cs` of the application:
 ```c#
+using Cisco.Otel.Distribution.Tracing;
+
 var options = 
     new CiscoOptions(
         new ExporterOptions[]
@@ -75,7 +79,7 @@ To create an instance of `CiscoOptions.cs` from `IConfiguration` instances:
 ```c#
 var configuration = 
     new ConfigurationBuilder()
-        .AddJsonFile("appsettings.test.json")
+        .AddJsonFile("appsettings.json")
         .Build();
 
 var options = CiscoOptionsHelper.FromConfiguration(configuration);
