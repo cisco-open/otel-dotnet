@@ -3,7 +3,7 @@ using OpenTelemetry.Trace;
 
 namespace Cisco.Otel.Distribution.Tracing;
 
-public static class Trace
+public static class Tracer
 {
     public static TracerProvider Init(CiscoOptions options)
     {

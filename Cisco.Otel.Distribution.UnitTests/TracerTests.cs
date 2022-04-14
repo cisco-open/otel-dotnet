@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using NUnit.Framework;
 using Cisco.Otel.Distribution.Tracing;
-using Trace = Cisco.Otel.Distribution.Tracing.Trace;
 
 namespace Cisco.Otel.Distribution.UnitTests;
 
@@ -22,7 +20,7 @@ public class TracerTests
                 new ExporterOptions.Console()
             });
 
-        var tracerProvider = Trace.Init(options);
+        var tracerProvider = Tracer.Init(options);
 
         var tracer = tracerProvider.GetTracer(options.ServiceName);
 
