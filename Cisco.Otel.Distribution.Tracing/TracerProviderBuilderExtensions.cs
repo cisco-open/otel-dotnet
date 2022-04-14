@@ -39,7 +39,7 @@ public static class TracerProviderBuilderExtensions
                         }
 
                         opts.Protocol = OtlpExportProtocol.Grpc;
-                        opts.Headers = $"{Constants.TokenHeader}={oltpGrpc.CiscoToken}";
+                        opts.Headers = $"{Constants.TokenHeader}={options.CiscoToken}";
                     });
                     break;
                 case ExporterOptions.OtlpHttp oltpHttp:
@@ -51,7 +51,7 @@ public static class TracerProviderBuilderExtensions
                         }
 
                         opts.Protocol = OtlpExportProtocol.HttpProtobuf;
-                        opts.Headers = $"{Constants.TokenHeader}={oltpHttp.CiscoToken}";
+                        opts.Headers = $"{Constants.TokenHeader}={options.CiscoToken}";
                     });
                     break;
                 default:

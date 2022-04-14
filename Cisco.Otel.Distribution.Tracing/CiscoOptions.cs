@@ -3,16 +3,26 @@ namespace Cisco.Otel.Distribution.Tracing;
 public class CiscoOptions
 {
     public CiscoOptions(
-        ICollection<ExporterOptions> exporterOptions, 
-        string? serviceName = null)
+        string ciscoToken,
+        string? serviceName = null,
+        ICollection<ExporterOptions>? exporterOptions = null)
     {
+        CiscoToken =
+            string.IsNullOrEmpty(ciscoToken)
+                ? throw new ArgumentException("Cisco Token cannot be null or empty")
+                : ciscoToken;
+
+        ServiceName = serviceName ?? Constants.DefaultServiceName;
+
+        exporterOptions ??= new List<ExporterOptions>();
+
         if (!exporterOptions.Any())
-            throw new ArgumentException("Must contain one or more exporter options");
+            exporterOptions.Add(new ExporterOptions.OtlpGrpc());
 
         ExporterOptions = exporterOptions;
-        ServiceName = serviceName ?? Constants.DefaultServiceName;
     }
 
     public string ServiceName { get; }
+    public string CiscoToken { get; }
     public IEnumerable<ExporterOptions> ExporterOptions { get; }
 }

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Cisco.Otel.Distribution.Tracing;
@@ -12,33 +11,27 @@ public class OptionsTests
     [Test]
     public void OptionsDefaultsTest()
     {
-        var options = new CiscoOptions(new List<ExporterOptions> {new ExporterOptions.Console()});
+        var ciscoToken = "my-cisco-token";
+        var options = new CiscoOptions(ciscoToken);
 
         Assert.AreEqual(Constants.DefaultServiceName, options.ServiceName);
+        Assert.IsTrue(options.ExporterOptions.Any());
+        Assert.AreEqual(1, options.ExporterOptions.Count());
+        Assert.IsTrue(options.ExporterOptions.First() is ExporterOptions.OtlpGrpc);
     }
 
     [Test]
-    public void EmptyExportersListTest()
+    public void OptionsMissingTokenTest()
     {
         Assert.Throws<ArgumentException>(() =>
             {
-                var options = new CiscoOptions(new List<ExporterOptions>());
-            },
-            "Must contain one or more exporter options");
-    }
-
-    [Test]
-    public void ExporterOptionsMissingTokenTest()
-    {
-        Assert.Throws<ArgumentException>(() =>
-            {
-                var otlpGrpc = new ExporterOptions.OtlpGrpc(string.Empty);
+                var emptyToken = new CiscoOptions("");
             },
             "Cisco Token cannot be null");
 
         Assert.Throws<ArgumentException>(() =>
             {
-                var otlpHttp = new ExporterOptions.OtlpHttp(string.Empty);
+                var nullToken = new CiscoOptions(ciscoToken: null!);
             },
             "Cisco Token cannot be null");
     }
@@ -46,24 +39,24 @@ public class OptionsTests
     [Test]
     public void OptionsFromConfigurationFileTest()
     {
-        var configuration = 
+        var configuration =
             new ConfigurationBuilder()
                 .AddJsonFile("appsettings.test.json")
                 .Build();
 
         var options = CiscoOptionsHelper.FromConfiguration(configuration);
 
+        Assert.AreEqual("my-cisco-token", options.CiscoToken);
         Assert.AreEqual("test-application", options.ServiceName);
         Assert.IsTrue(options.ExporterOptions.Any());
         Assert.AreEqual(1, options.ExporterOptions.Count());
         Assert.IsTrue(options.ExporterOptions.First() is ExporterOptions.OtlpGrpc);
-        
-        var grpcExporter = (ExporterOptions.OtlpGrpc)options.ExporterOptions.First();
-        
-        Assert.AreEqual("my-cisco-token", grpcExporter.CiscoToken);
+
+        var grpcExporter = (ExporterOptions.OtlpGrpc) options.ExporterOptions.First();
+
         Assert.AreEqual("http://localhost:4317", grpcExporter.CollectorEndpoint);
     }
-    
+
     [Test]
     public void OptionsFromEnvironmentVariablesTest()
     {
@@ -71,17 +64,17 @@ public class OptionsTests
         Environment.SetEnvironmentVariable(Constants.ServiceNameEnvironmentVariableName, "test-application");
         Environment.SetEnvironmentVariable(Constants.ExporterTypeEnvironmentVariableName, "otlp-grpc");
         Environment.SetEnvironmentVariable(Constants.CollectorEndpointEnvironmentVariableName, "http://localhost:4317");
-        
+
         var options = CiscoOptionsHelper.FromEnvironmentVariables();
 
+        Assert.AreEqual("my-cisco-token", options.CiscoToken);
         Assert.AreEqual("test-application", options.ServiceName);
         Assert.IsTrue(options.ExporterOptions.Any());
         Assert.AreEqual(1, options.ExporterOptions.Count());
         Assert.IsTrue(options.ExporterOptions.First() is ExporterOptions.OtlpGrpc);
-        
-        var grpcExporter = (ExporterOptions.OtlpGrpc)options.ExporterOptions.First();
-        
-        Assert.AreEqual("my-cisco-token", grpcExporter.CiscoToken);
+
+        var grpcExporter = (ExporterOptions.OtlpGrpc) options.ExporterOptions.First();
+
         Assert.AreEqual("http://localhost:4317", grpcExporter.CollectorEndpoint);
     }
 }

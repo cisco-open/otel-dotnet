@@ -11,10 +11,12 @@ public class TracerTests
     [Test]
     public void HappyPathTest()
     {
+        var ciscoToken = "my-cisco-token";
         var exportedItems = new List<Activity>();
             
         var options = new CiscoOptions(
-            new ExporterOptions[]
+            ciscoToken: ciscoToken,
+            exporterOptions: new ExporterOptions[]
             {
                 new ExporterOptions.InMemory(exportedItems),
                 new ExporterOptions.Console()

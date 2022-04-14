@@ -12,16 +12,24 @@ public static class CiscoOptionsHelper
             Environment.GetEnvironmentVariable(Constants.CiscoTokenEnvironmentVariableName) ??
             throw new Exception("Could not find Cisco Token in environment variables");
 
-        var exporterType = Environment.GetEnvironmentVariable(Constants.ExporterTypeEnvironmentVariableName) ??
-                           Constants.DefaultExporterType;
+        var exporterType = 
+            Environment.GetEnvironmentVariable(Constants.ExporterTypeEnvironmentVariableName);
 
-        var collectorEndpoint = Environment.GetEnvironmentVariable(Constants.CollectorEndpointEnvironmentVariableName);
+        var collectorEndpoint = 
+            Environment.GetEnvironmentVariable(Constants.CollectorEndpointEnvironmentVariableName);
 
-        var exporterOptions = GetExporterOptions(exporterType, ciscoToken, collectorEndpoint);
+        if (exporterType is not null)
+        {
+            return
+                new CiscoOptions(
+                    ciscoToken,
+                    serviceName,
+                    new List<ExporterOptions> {GetExporterOptions(exporterType, collectorEndpoint)});
+        }
 
         return
             new CiscoOptions(
-                new List<ExporterOptions> {exporterOptions},
+                ciscoToken,
                 serviceName);
     }
 
@@ -40,27 +48,27 @@ public static class CiscoOptionsHelper
         var ciscoToken = ciscoOptionsFromConfig.CiscoToken ??
                          throw new Exception("Could not find Cisco Token in configuration file");
 
-        var exporterType = ciscoOptionsFromConfig.ExporterOptions?.Type ?? Constants.DefaultExporterType;
-
-        var collectorEndpoint = ciscoOptionsFromConfig.ExporterOptions?.Endpoint;
-
-        var exporterOptions = GetExporterOptions(exporterType, ciscoToken, collectorEndpoint);
+        var exporters =
+            ciscoOptionsFromConfig.ExporterOptions?
+                .Where(exporterOptions => exporterOptions.Type is not null)
+                .Select(exporterOptions => GetExporterOptions(exporterOptions.Type, exporterOptions.Endpoint))
+                .ToList();
 
         return
             new CiscoOptions(
-                new List<ExporterOptions> {exporterOptions},
-                ciscoOptionsFromConfig.ServiceName);
+                ciscoToken,
+                ciscoOptionsFromConfig.ServiceName,
+                exporters);
     }
 
     private static ExporterOptions GetExporterOptions(
         string exporterType,
-        string ciscoToken,
         string? collectorEndpoint = null)
     {
         return exporterType switch
         {
-            Constants.GrpcExporterType => new ExporterOptions.OtlpGrpc(ciscoToken, collectorEndpoint),
-            Constants.HttpExporterType => new ExporterOptions.OtlpHttp(ciscoToken, collectorEndpoint),
+            Constants.GrpcExporterType => new ExporterOptions.OtlpGrpc(collectorEndpoint),
+            Constants.HttpExporterType => new ExporterOptions.OtlpHttp(collectorEndpoint),
             Constants.ConsoleExporterType => new ExporterOptions.Console(),
             _ => throw new ArgumentException("Wrong exporter type", exporterType)
         };
@@ -69,13 +77,13 @@ public static class CiscoOptionsHelper
 
 internal class CiscoOptionsFromConfig
 {
-    public string ServiceName { get; set; }
+    public string? ServiceName { get; set; }
     public string CiscoToken { get; set; }
-    public ExporterOptionsFromConfig ExporterOptions { get; set; }
+    public ExporterOptionsFromConfig[]? ExporterOptions { get; set; }
 }
 
 internal class ExporterOptionsFromConfig
 {
-    public string Type { get; set; }
-    public string Endpoint { get; set; }
+    public string? Type { get; set; }
+    public string? Endpoint { get; set; }
 }
