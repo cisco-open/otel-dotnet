@@ -10,7 +10,7 @@ public static class CiscoOptionsHelper
 
         var ciscoToken =
             Environment.GetEnvironmentVariable(Constants.CiscoTokenEnvironmentVariableName) ??
-            throw new Exception("Could not find Cisco Token in configuration file");
+            throw new Exception("Could not find Cisco Token in environment variables");
 
         var exporterType = Environment.GetEnvironmentVariable(Constants.ExporterTypeEnvironmentVariableName) ??
                            Constants.DefaultExporterType;
