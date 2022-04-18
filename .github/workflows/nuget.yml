@@ -1,33 +1,31 @@
-name: 'Deploy to NuGet'
+name: Deploy to NuGet
 
-on:
-  push:
-    branches: [ main ]
+on: [push, pull_request]
 
 env:
   PACKAGE_OUTPUT_DIRECtORY: ${{ github.workspace }}\output
-  NUGET_SOURCE_URL: 'https://api.nuget.org/v3/index.json'
+  NUGET_SOURCE_URL: https://api.nuget.org/v3/index.json
   
 jobs:
   deploy:
-    name: 'Deploy'
-    runs-on: 'windows-latest'
+    name: Deploy
+    runs-on: ubuntu-latest
     steps:
-      - name: 'Checkout'
+      - name: Checkout
         uses: actions/checkout@v2
 
-      - name: 'Install dotnet'
+      - name: Install dotnet
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '6.0'
+          dotnet-version: 6.0.x
 
-      - name: 'Restore Packages'
+      - name: Restore Packages
         run: dotnet restore
 
-      - name: 'Build Project'
+      - name: Build Project
         run: dotnet build Cisco.Otel.Distribution.Tracing/Cisco.Otel.Distribution.Tracing.csproj --no-restore --configuration Release
 
-      - name: 'Pack Project'
+      - name: Pack Project
         run: dotnet pack Cisco.Otel.Distribution.Tracing/Cisco.Otel.Distribution.Tracing.csproj --no-restore --no-build --configuration Release --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
 
 #      - name: 'Push Package'
