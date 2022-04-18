@@ -3,7 +3,7 @@ name: Deploy to NuGet
 on: [push, pull_request]
 
 env:
-  PACKAGE_OUTPUT_DIRECtORY: ${{ github.workspace }}\output
+  PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output
   NUGET_SOURCE_URL: https://api.nuget.org/v3/index.json
   
 jobs:
