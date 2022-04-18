@@ -1,4 +1,4 @@
-name: Build and Test Library
+name: Build and Test
 
 on: [push, pull_request]
 

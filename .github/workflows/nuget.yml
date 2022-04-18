@@ -1,6 +1,8 @@
 name: Deploy to NuGet
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main ]
 
 env:
   PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output
