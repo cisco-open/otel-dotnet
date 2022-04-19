@@ -20,5 +20,5 @@ jobs:
         uses: wearerequired/lint-action@v1
         with:
           dotnet_format: true
-          auto-fix: true
+          auto_fix: true
   
