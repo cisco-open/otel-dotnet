@@ -13,7 +13,7 @@ public class TracerTests
     {
         var ciscoToken = "my-cisco-token";
         var exportedItems = new List<Activity>();
-            
+
         var options = new CiscoOptions(
             ciscoToken: ciscoToken,
             exporterOptions: new ExporterOptions[]
