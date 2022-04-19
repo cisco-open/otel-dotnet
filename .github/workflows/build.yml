@@ -24,5 +24,9 @@ jobs:
       - name: Build
         run: dotnet build --no-restore
 
-      - name: Run Tests
-        run: dotnet test --no-build --verbosity normal
+      - name: Run Tests with Coverage
+        run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+
+      - name: Codecov
+        uses: codecov/codecov-action@master
+        
