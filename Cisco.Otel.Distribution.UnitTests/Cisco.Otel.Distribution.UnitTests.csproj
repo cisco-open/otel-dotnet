@@ -26,6 +26,7 @@
       <None Update="appsettings.test.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Remove="coverage.opencover.xml" />
     </ItemGroup>
 
 </Project>
