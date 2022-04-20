@@ -7,7 +7,7 @@ public static class Tracer
 {
     public static TracerProvider Init(CiscoOptions options)
     {
-        return 
+        return
             Sdk.CreateTracerProviderBuilder()
                 .AddCiscoTracing(options)
                 .Build();

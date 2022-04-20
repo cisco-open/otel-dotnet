@@ -24,7 +24,7 @@ public abstract class ExporterOptions
         {
             CollectorEndpoint = collectorEndpoint;
         }
-        
+
         public string? CollectorEndpoint { get; }
     }
 
@@ -34,10 +34,10 @@ public abstract class ExporterOptions
         {
             ExportedItems = exportedItems;
         }
-        
+
         public ICollection<Activity> ExportedItems { get; }
     }
-    
+
     public class Console : ExporterOptions
     {
     }

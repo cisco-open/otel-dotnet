@@ -12,10 +12,10 @@ public static class CiscoOptionsHelper
             Environment.GetEnvironmentVariable(Constants.CiscoTokenEnvironmentVariableName) ??
             throw new Exception("Could not find Cisco Token in environment variables");
 
-        var exporterType = 
+        var exporterType =
             Environment.GetEnvironmentVariable(Constants.ExporterTypeEnvironmentVariableName);
 
-        var collectorEndpoint = 
+        var collectorEndpoint =
             Environment.GetEnvironmentVariable(Constants.CollectorEndpointEnvironmentVariableName);
 
         if (exporterType is not null)
@@ -24,7 +24,7 @@ public static class CiscoOptionsHelper
                 new CiscoOptions(
                     ciscoToken,
                     serviceName,
-                    new List<ExporterOptions> {GetExporterOptions(exporterType, collectorEndpoint)});
+                    new List<ExporterOptions> { GetExporterOptions(exporterType, collectorEndpoint) });
         }
 
         return
@@ -78,7 +78,7 @@ public static class CiscoOptionsHelper
 internal class CiscoOptionsFromConfig
 {
     public string? ServiceName { get; set; }
-    public string CiscoToken { get; set; }
+    public string? CiscoToken { get; set; }
     public ExporterOptionsFromConfig[]? ExporterOptions { get; set; }
 }
 
