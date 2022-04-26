@@ -1,88 +1,175 @@
-# Otel-dotnet
-This is an alpha version of the Cisco OpenTelemetry distribution for .Net.
+# otel-dotnet
 
-## Getting Started
+This package provides OpenTelemetry-compliant tracing to .NET applications for the collection of distributed tracing and performance metrics in [Cisco Telescope](https://console.telescope.app/?utm_source=github).
 
-### Installing the Cisco.Otel.Distribution package
+## Contents
 
-You can add the package to your application by using the following command:
+- [Installation](#installation)
+    - [Install Packages](#install-packages)
+    - [Library initialization](#library-initialization)
+        - [.NET Core](#.NET-core)
+        - [.NET](#.NET)
+    - [OpenTelemetry Collector Configuration](#opentelemetry-collector-configuration)
+    - [Existing OpenTelemetry Instrumentation](#existing-opentelemetry-instrumentation)
+- [Supported Runtimes](#supported-runtimes)
+- [Frameworks](#frameworks)
+- [Supported Libraries](#supported-libraries)
+- [Configuration](#configuration)
+- [Getting Help](#getting-help)
+- [Opening Issues](#opening-issues)
+- [License](#license)
 
-`dotnet add package Cisco.Otel.Distribution --prerelease`
+## Installation
 
-### Usage
+### Install packages
 
-To use the Cisco.Otel.Distribution distro with a .NET console application, add the following to the start of the application:
+To install Cisco OpenTelemetry Distribution simply run:
+
+```sh
+dotnet add package Cisco.Otel.Distribution
+```
+
+### Library initialization
+
+> Cisco OpenTelemetry Distribution is activated and instruments the supported libraries once the module is imported.
+
+#### .NET Core
+
 ```c#
 using Cisco.Otel.Distribution.Tracing;
 
 var options = 
     new CiscoOptions(
-        new ExporterOptions[]
-        {
-            new ExporterOptions.OtlpGrpc("my-cisco-token", "http://localhost:4317"),
-            new ExporterOptions.Console()
-        });
+        "cisco-token",
+        "my-app-name");
 
-var tracerProvider = Trace.Init(options);
+services.AddCiscoTracing(options);
 ```
 
+#### .NET
 
-To use the Cisco.Otel.Distribution distro with a .NET Core web application, add the following to the `Startup.cs` of the application:
 ```c#
 using Cisco.Otel.Distribution.Tracing;
 
 var options = 
     new CiscoOptions(
+        "cisco-token",
+        "my-app-name");
+
+Tracer.Init(options);
+```
+
+### OpenTelemetry Collector Configuration
+
+> By default, Cisco OpenTelemetry Distribution exports data directly to [Cisco Telescope's](https://console.telescope.app/?utm_source=github) infrastructure backend.
+> **Existing** OpenTelemetery Collector is supported, the following configuration can be applied
+
+#### Configure custom trace exporter
+
+> Cisco OpenTelemetry Distribution supports configure multiple custom exporters.
+> Example for create OtlpGrpc Span exporter to local OpenTelemetry collector:
+
+```c#
+using Cisco.Otel.Distribution.Tracing;
+
+var options =
+    new CiscoOptions(
+        "cisco-token",
+        "my-app-name",
         new ExporterOptions[]
         {
-            new ExporterOptions.OtlpGrpc("my-cisco-token", "http://localhost:4317"),
-            new ExporterOptions.Console()
+            new ExporterOptions.OtlpGrpc("http://localhost:4317"),
         });
-        
-services.AddCiscoTracing(Configuration);
+
+services.AddCiscoTracing(options);
 ```
 
-### Configuration
+#### Configure custom OpenTelemetry collector to export trace data to [Cisco Telescope's](https://console.telescope.app/?utm_source=github) external collector.
 
-There are multiple ways of configuring the Cisco.Otel.Distribution distro. By manually creating an instance of `CiscoOptions.cs`, configuring `IConfiguration` instances (eg via appsettings.json), or adding environment variables:
+```yaml
+collector.yaml ...
 
-|Environment variable|Appsettings key|Default|Description|
-|-|-|-|-|
-|`CISCO_TOKEN`|CiscoOptions.CiscoToken|-|`required` The Cisco account token|
-|`OTEL_SERVICE_NAME`|CiscoOptions.ServiceName|`application`|`optional` The application name that will be set for traces|
-|`OTEL_EXPORTER_TYPE`|CiscoOptions.ExporterOptions.Type|`otlp-grpc`|`optional` The exporter types to use. Multiple exporter options available via IConfiguration instances and the Init method, see example below|
-|`OTEL_COLLECTOR_ENDPOINT`|CiscoOptions.ExporterOptions.Endpoint|`http://localhost:4317`|`optional` The address of the trace collector to send traces to|
+exporters:
+  otlphttp:
+    traces_endpoint: https://production.cisco-udp.com/trace-collector:80
+    headers:
+      authorization: <Your Telescope Token>
+    compression: gzip
 
 
-Using appsettings.json:
-```json
-{
-  "CiscoOptions": {
-    "ServiceName": "my-application",
-    "CiscoToken" : "my-cisco-token",
-    "ExporterOptions": [
-      {
-        "Type": "otlp-grpc",
-        "Endpoint": "http://localhost:4317"
-      }
-    ]
-  }
-}
+service:
+  pipelines:
+    traces:
+      exporters: [otlphttp]
 ```
 
-To create an instance of `CiscoOptions.cs` from environment variables:
+### Existing OpenTelemetry Instrumentation
+
+> Notice: Only relevant if interested in streaming existing OpenTelemetry workloads.
+> [Cisco Telescope](https://console.telescope.app/?utm_source=github). supports native OpenTelemetery traces.
 
 ```c#
-var options = CiscoOptionsHelper.FromEnvironmentVariables();
+//TODO
 ```
 
-To create an instance of `CiscoOptions.cs` from `IConfiguration` instances:
+## Supported Runtimes
 
-```c#
-var configuration = 
-    new ConfigurationBuilder()
-        .AddJsonFile("appsettings.json")
-        .Build();
+| Platform Version                  | Supported |
+|-----------------------------------| --------- |
+| .NET Framework `4.6.2 and higher` | ✅        |
+| .NET Core `3.1`                   | ✅        |
+| .NET `5.0`                        | ✅        |
+| .NET `6.0`                        | ✅        |
 
-var options = CiscoOptionsHelper.FromConfiguration(configuration);
-```
+## Frameworks
+
+> TODO
+
+## Supported Libraries
+
+> TODO
+
+Cisco OpenTelemetry .NET Distribution provides out-of-the-box instrumentation (tracing) and advanced **payload collections** for many popular frameworks and libraries.
+
+## Configuration
+
+Advanced options can be configured as a parameter to the init() method:
+
+| AppSettings key | Env                    | Type    | Default       | Description                                                       |
+|-----------------| ---------------------- | ------- | ------------- | ----------------------------------------------------------------- |
+| CiscoOptions.CiscoToken      | CISCO_TOKEN            | string  | -             | Cisco account token                                               |
+| CiscoOptions.ServiceName     | OTEL_SERVICE_NAME      | string  | `application` | Application name that will be set for traces                      |
+
+Exporter options
+
+| AppSettings key         | Env                     | Type                | Default                                               | Description                                                                                                                     |
+| ----------------- | ----------------------- | ------------------- | ----------------------------------------------------- |---------------------------------------------------------------------------------------------------------------------------------|
+| CiscoOptions.ExporterOptions.Endpoint | OTEL_COLLECTOR_ENDPOINT | string              | `http://localhost:4317` | The address of the trace collector to send traces to                                                                            |
+| CiscoOptions.ExporterOptions.Type              | OTEL_EXPORTER_TYPE      | string              | `otlp-grpc`                                           | The exporter type to use. Multiple exporter options available via IConfiguration instances and Init function. See example below |
+
+## Getting Help
+
+If you have any issue around using the library or the product, please don't hesitate to:
+
+- Use the [documentation](https://docs.telescope.com).
+- Use the help widget inside the product.
+- Open an issue in GitHub.
+
+## Opening Issues
+
+If you encounter a bug with the Cisco OpenTelemetry Distribution for .NET, we want to hear about it.
+
+When opening a new issue, please provide as much information about the environment:
+
+- Library version, .NET version, dependencies, etc.
+- Snippet of the usage.
+- A reproducible example can really help.
+
+The GitHub issues are intended for bug reports and feature requests.
+For help and questions about [Cisco Telescope](https://console.telescope.app/?utm_source=github), use the help widget inside the product.
+
+## License
+
+Provided under the Apache 2.0. See LICENSE for details.
+
+Copyright 2022, Cisco
