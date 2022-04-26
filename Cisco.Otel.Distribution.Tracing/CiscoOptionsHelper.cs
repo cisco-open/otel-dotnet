@@ -19,13 +19,11 @@ public static class CiscoOptionsHelper
             Environment.GetEnvironmentVariable(Constants.CollectorEndpointEnvironmentVariableName);
 
         if (exporterType is not null)
-        {
             return
                 new CiscoOptions(
                     ciscoToken,
                     serviceName,
-                    new List<ExporterOptions> { GetExporterOptions(exporterType, collectorEndpoint) });
-        }
+                    new List<ExporterOptions> {GetExporterOptions(exporterType, collectorEndpoint)});
 
         return
             new CiscoOptions(
@@ -40,10 +38,7 @@ public static class CiscoOptionsHelper
                 .GetSection(Constants.ConfigurationSectionName)
                 .Get<CiscoOptionsFromConfig>();
 
-        if (ciscoOptionsFromConfig == null)
-        {
-            throw new Exception("Could not find Cisco Options in configuration file");
-        }
+        if (ciscoOptionsFromConfig == null) throw new Exception("Could not find Cisco Options in configuration file");
 
         var ciscoToken = ciscoOptionsFromConfig.CiscoToken ??
                          throw new Exception("Could not find Cisco Token in configuration file");
@@ -62,7 +57,7 @@ public static class CiscoOptionsHelper
     }
 
     private static ExporterOptions GetExporterOptions(
-        string exporterType,
+        string? exporterType,
         string? collectorEndpoint = null)
     {
         return exporterType switch

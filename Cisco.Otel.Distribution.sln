@@ -2,15 +2,13 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cisco.Otel.Distribution.Tracing", "Cisco.Otel.Distribution.Tracing\Cisco.Otel.Distribution.Tracing.csproj", "{616A57C2-D29B-4B4D-BBDB-49EC1E634205}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cisco.Otel.Distribution.UnitTests", "Cisco.Otel.Distribution.UnitTests\Cisco.Otel.Distribution.UnitTests.csproj", "{87392CF5-CECB-4E40-A7B1-7AE8A40DB173}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cisco.Otel.Distribution.UnitTests", "tests\Cisco.Otel.Distribution.UnitTests\Cisco.Otel.Distribution.UnitTests.csproj", "{87392CF5-CECB-4E40-A7B1-7AE8A40DB173}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{A89603ED-6F5D-4AA4-8571-A571A614A119}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreApp", "AspNetCoreApp\AspNetCoreApp.csproj", "{60C40DC4-F897-4EE5-B235-694B70A03C56}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreApp", "examples\AspNetCoreApp\AspNetCoreApp.csproj", "{60C40DC4-F897-4EE5-B235-694B70A03C56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{34E5AA1E-D092-4E3D-8DE6-F1DDE61EDF7B}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D864F4E1-AC74-4369-BF3E-EA992B5F5BE8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "examples\ConsoleApp\ConsoleApp.csproj", "{34E5AA1E-D092-4E3D-8DE6-F1DDE61EDF7B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A8279F35-A2B9-4706-A4F6-ECBEFA328D3C}"
 EndProject
@@ -40,7 +38,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{60C40DC4-F897-4EE5-B235-694B70A03C56} = {A89603ED-6F5D-4AA4-8571-A571A614A119}
 		{34E5AA1E-D092-4E3D-8DE6-F1DDE61EDF7B} = {A89603ED-6F5D-4AA4-8571-A571A614A119}
-		{616A57C2-D29B-4B4D-BBDB-49EC1E634205} = {D864F4E1-AC74-4369-BF3E-EA992B5F5BE8}
 		{87392CF5-CECB-4E40-A7B1-7AE8A40DB173} = {A8279F35-A2B9-4706-A4F6-ECBEFA328D3C}
 	EndGlobalSection
 EndGlobal

@@ -31,7 +31,7 @@ public class OptionsTests
 
         Assert.Throws<ArgumentException>(() =>
             {
-                var nullToken = new CiscoOptions(ciscoToken: null!);
+                var nullToken = new CiscoOptions(null!);
             },
             "Cisco Token cannot be null");
     }
@@ -52,7 +52,7 @@ public class OptionsTests
         Assert.AreEqual(1, options.ExporterOptions.Count());
         Assert.IsTrue(options.ExporterOptions.First() is ExporterOptions.OtlpGrpc);
 
-        var grpcExporter = (ExporterOptions.OtlpGrpc)options.ExporterOptions.First();
+        var grpcExporter = (ExporterOptions.OtlpGrpc) options.ExporterOptions.First();
 
         Assert.AreEqual("http://localhost:4317", grpcExporter.CollectorEndpoint);
     }
@@ -73,7 +73,7 @@ public class OptionsTests
         Assert.AreEqual(1, options.ExporterOptions.Count());
         Assert.IsTrue(options.ExporterOptions.First() is ExporterOptions.OtlpGrpc);
 
-        var grpcExporter = (ExporterOptions.OtlpGrpc)options.ExporterOptions.First();
+        var grpcExporter = (ExporterOptions.OtlpGrpc) options.ExporterOptions.First();
 
         Assert.AreEqual("http://localhost:4317", grpcExporter.CollectorEndpoint);
     }

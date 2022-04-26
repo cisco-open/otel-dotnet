@@ -15,7 +15,7 @@ public class TracerTests
         var exportedItems = new List<Activity>();
 
         var options = new CiscoOptions(
-            ciscoToken: ciscoToken,
+            ciscoToken,
             exporterOptions: new ExporterOptions[]
             {
                 new ExporterOptions.InMemory(exportedItems),
