@@ -23,7 +23,7 @@ public static class CiscoOptionsHelper
                 new CiscoOptions(
                     ciscoToken,
                     serviceName,
-                    new List<ExporterOptions> {GetExporterOptions(exporterType, collectorEndpoint)});
+                    new List<ExporterOptions> { GetExporterOptions(exporterType, collectorEndpoint) });
 
         return
             new CiscoOptions(
