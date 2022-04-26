@@ -4,6 +4,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cisco.Otel.Distribution.Tra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cisco.Otel.Distribution.UnitTests", "Cisco.Otel.Distribution.UnitTests\Cisco.Otel.Distribution.UnitTests.csproj", "{87392CF5-CECB-4E40-A7B1-7AE8A40DB173}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{A89603ED-6F5D-4AA4-8571-A571A614A119}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreApp", "AspNetCoreApp\AspNetCoreApp.csproj", "{60C40DC4-F897-4EE5-B235-694B70A03C56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{34E5AA1E-D092-4E3D-8DE6-F1DDE61EDF7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +24,17 @@ Global
 		{87392CF5-CECB-4E40-A7B1-7AE8A40DB173}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87392CF5-CECB-4E40-A7B1-7AE8A40DB173}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87392CF5-CECB-4E40-A7B1-7AE8A40DB173}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60C40DC4-F897-4EE5-B235-694B70A03C56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60C40DC4-F897-4EE5-B235-694B70A03C56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60C40DC4-F897-4EE5-B235-694B70A03C56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60C40DC4-F897-4EE5-B235-694B70A03C56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34E5AA1E-D092-4E3D-8DE6-F1DDE61EDF7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34E5AA1E-D092-4E3D-8DE6-F1DDE61EDF7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34E5AA1E-D092-4E3D-8DE6-F1DDE61EDF7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34E5AA1E-D092-4E3D-8DE6-F1DDE61EDF7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{60C40DC4-F897-4EE5-B235-694B70A03C56} = {A89603ED-6F5D-4AA4-8571-A571A614A119}
+		{34E5AA1E-D092-4E3D-8DE6-F1DDE61EDF7B} = {A89603ED-6F5D-4AA4-8571-A571A614A119}
 	EndGlobalSection
 EndGlobal
