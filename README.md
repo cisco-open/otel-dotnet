@@ -133,19 +133,35 @@ Cisco OpenTelemetry .NET Distribution provides out-of-the-box instrumentation (t
 
 ## Configuration
 
-Advanced options can be configured as a parameter to the init() method:
+Advanced options can be configured as parameters to the Init() method:
 
 | AppSettings key | Env                    | Type    | Default       | Description                                                       |
 |-----------------| ---------------------- | ------- | ------------- | ----------------------------------------------------------------- |
 | CiscoOptions.CiscoToken      | CISCO_TOKEN            | string  | -             | Cisco account token                                               |
 | CiscoOptions.ServiceName     | OTEL_SERVICE_NAME      | string  | `application` | Application name that will be set for traces                      |
 
-Exporter options
+Exporter options:
 
 | AppSettings key         | Env                     | Type                | Default                                               | Description                                                                                                                     |
 | ----------------- | ----------------------- | ------------------- | ----------------------------------------------------- |---------------------------------------------------------------------------------------------------------------------------------|
 | CiscoOptions.ExporterOptions.Endpoint | OTEL_COLLECTOR_ENDPOINT | string              | `http://localhost:4317` | The address of the trace collector to send traces to                                                                            |
 | CiscoOptions.ExporterOptions.Type              | OTEL_EXPORTER_TYPE      | string              | `otlp-grpc`                                           | The exporter type to use. Multiple exporter options available via IConfiguration instances and Init function. See example below |
+
+
+To configure options from environment variables:
+```c#
+var options = CiscoOptionsHelper.FromEnvironmentVariables();
+```
+
+From IConfiguration instances (eg via appsettings.json):
+```c#
+var configuration = 
+    new ConfigurationBuilder()
+        .AddJsonFile("appsettings.json")
+        .Build();
+
+var options = CiscoOptionsHelper.FromConfiguration(configuration);
+```
 
 ## Getting Help
 
