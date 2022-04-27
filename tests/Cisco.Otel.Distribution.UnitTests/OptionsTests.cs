@@ -31,7 +31,7 @@ public class OptionsTests
 
         Assert.Throws<ArgumentException>(() =>
             {
-                var nullToken = new CiscoOptions(ciscoToken: null!);
+                var nullToken = new CiscoOptions(null!);
             },
             "Cisco Token cannot be null");
     }
