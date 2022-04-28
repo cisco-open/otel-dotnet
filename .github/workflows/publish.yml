@@ -1,4 +1,4 @@
-name: Deploy to NuGet
+name: Publish to NuGet
 
 on:
   push:
@@ -30,5 +30,6 @@ jobs:
       - name: Pack Project
         run: dotnet pack Cisco.Otel.Distribution.Tracing/Cisco.Otel.Distribution.Tracing.csproj --no-restore --no-build --configuration Release --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
 
-#      - name: 'Push Package'
-#        run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg -s ${{ env.NUGET_SOURCE_URL }}
+      - name: Push Package
+        run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg -k ${{ secrets.NUGET_AUTH_TOKEN }} -s ${{ env.NUGET_SOURCE_URL }}
+        
