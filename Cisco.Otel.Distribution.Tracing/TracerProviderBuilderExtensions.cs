@@ -6,19 +6,40 @@ namespace Cisco.Otel.Distribution.Tracing;
 
 public static class TracerProviderBuilderExtensions
 {
+    public static TracerProviderBuilder AddCiscoTracing(this TracerProviderBuilder builder)
+    {
+        var ciscoToken =
+            Environment.GetEnvironmentVariable(Constants.CiscoTokenEnvVarName) ??
+            throw new Exception("Could not find Cisco Token in environment variables");
+
+        builder
+            .SetResourceBuilder(
+                ResourceBuilder
+                    .CreateDefault()
+                    .AddEnvironmentVariableDetector()
+                    .AddTelemetrySdk())
+            .AddOtlpExporter(options => options.Headers = $"{Constants.TokenHeader}={ciscoToken}");
+
+        builder.AddInstrumentation();
+
+        return builder;
+    }
+
     public static TracerProviderBuilder AddCiscoTracing(this TracerProviderBuilder builder, CiscoOptions options)
     {
         if (options is null)
         {
             throw new ArgumentNullException(nameof(options),
-                "No options have been set in appsettings.json or environment variables.");
+                "No options have been set.");
         }
 
         builder
             .AddSource(options.ServiceName)
             .SetResourceBuilder(
-                ResourceBuilder.CreateDefault()
-                    .AddService(options.ServiceName));
+                ResourceBuilder
+                    .CreateDefault()
+                    .AddService(options.ServiceName)
+                    .AddTelemetrySdk());
 
         foreach (var exporterOption in options.ExporterOptions)
         {
@@ -59,6 +80,13 @@ public static class TracerProviderBuilderExtensions
             }
         }
 
+        builder.AddInstrumentation();
+
+        return builder;
+    }
+
+    private static TracerProviderBuilder AddInstrumentation(this TracerProviderBuilder builder)
+    {
         builder.AddHttpClientInstrumentation();
         builder.AddSqlClientInstrumentation();
 

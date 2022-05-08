@@ -11,10 +11,11 @@ public static class Constants
     public const string DefaultServiceName = "application";
     public const string DefaultExporterType = GrpcExporterType;
 
-    public const string ConfigurationSectionName = "CiscoOptions";
+    public const string CiscoOptionsConfigName = "CiscoOptions";
 
-    public const string CiscoTokenEnvironmentVariableName = "CISCO_TOKEN";
-    public const string ServiceNameEnvironmentVariableName = "OTEL_SERVICE_NAME";
-    public const string CollectorEndpointEnvironmentVariableName = "OTEL_COLLECTOR_ENDPOINT";
-    public const string ExporterTypeEnvironmentVariableName = "OTEL_EXPORTER_TYPE";
+    public const string CiscoTokenEnvVarName = "CISCO_TOKEN";
+
+    // public const string ServiceNameEnvironmentVariableName = "OTEL_SERVICE_NAME";
+    // public const string CollectorEndpointEnvironmentVariableName = "OTEL_COLLECTOR_ENDPOINT";
+    // public const string ExporterTypeEnvironmentVariableName = "OTEL_EXPORTER_TYPE";
 }

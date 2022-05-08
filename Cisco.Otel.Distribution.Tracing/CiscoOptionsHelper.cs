@@ -4,41 +4,15 @@ namespace Cisco.Otel.Distribution.Tracing;
 
 public static class CiscoOptionsHelper
 {
-    public static CiscoOptions FromEnvironmentVariables()
-    {
-        var serviceName = Environment.GetEnvironmentVariable(Constants.ServiceNameEnvironmentVariableName);
-
-        var ciscoToken =
-            Environment.GetEnvironmentVariable(Constants.CiscoTokenEnvironmentVariableName) ??
-            throw new Exception("Could not find Cisco Token in environment variables");
-
-        var exporterType =
-            Environment.GetEnvironmentVariable(Constants.ExporterTypeEnvironmentVariableName);
-
-        var collectorEndpoint =
-            Environment.GetEnvironmentVariable(Constants.CollectorEndpointEnvironmentVariableName);
-
-        if (exporterType is not null)
-            return
-                new CiscoOptions(
-                    ciscoToken,
-                    serviceName,
-                    new List<ExporterOptions> { GetExporterOptions(exporterType, collectorEndpoint) });
-
-        return
-            new CiscoOptions(
-                ciscoToken,
-                serviceName);
-    }
-
     public static CiscoOptions FromConfiguration(IConfiguration configuration)
     {
         var ciscoOptionsFromConfig =
             configuration
-                .GetSection(Constants.ConfigurationSectionName)
+                .GetSection(Constants.CiscoOptionsConfigName)
                 .Get<CiscoOptionsFromConfig>();
 
-        if (ciscoOptionsFromConfig == null) throw new Exception("Could not find Cisco Options in configuration file");
+        if (ciscoOptionsFromConfig == null)
+            throw new Exception("Could not find Cisco Options in configuration file");
 
         var ciscoToken = ciscoOptionsFromConfig.CiscoToken ??
                          throw new Exception("Could not find Cisco Token in configuration file");
