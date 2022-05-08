@@ -56,25 +56,4 @@ public class OptionsTests
 
         Assert.AreEqual("http://localhost:4317", grpcExporter.CollectorEndpoint);
     }
-
-    [Test]
-    public void OptionsFromEnvironmentVariablesTest()
-    {
-        Environment.SetEnvironmentVariable(Constants.CiscoTokenEnvironmentVariableName, "my-cisco-token");
-        Environment.SetEnvironmentVariable(Constants.ServiceNameEnvironmentVariableName, "test-application");
-        Environment.SetEnvironmentVariable(Constants.ExporterTypeEnvironmentVariableName, "otlp-grpc");
-        Environment.SetEnvironmentVariable(Constants.CollectorEndpointEnvironmentVariableName, "http://localhost:4317");
-
-        var options = CiscoOptionsHelper.FromEnvironmentVariables();
-
-        Assert.AreEqual("my-cisco-token", options.CiscoToken);
-        Assert.AreEqual("test-application", options.ServiceName);
-        Assert.IsTrue(options.ExporterOptions.Any());
-        Assert.AreEqual(1, options.ExporterOptions.Count());
-        Assert.IsTrue(options.ExporterOptions.First() is ExporterOptions.OtlpGrpc);
-
-        var grpcExporter = (ExporterOptions.OtlpGrpc)options.ExporterOptions.First();
-
-        Assert.AreEqual("http://localhost:4317", grpcExporter.CollectorEndpoint);
-    }
 }
