@@ -12,7 +12,7 @@ public static class Tracer
                 .AddCiscoTracing()
                 .Build();
     }
-    
+
     public static TracerProvider Init(CiscoOptions options)
     {
         return

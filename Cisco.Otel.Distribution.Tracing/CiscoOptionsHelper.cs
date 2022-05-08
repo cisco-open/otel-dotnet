@@ -11,7 +11,7 @@ public static class CiscoOptionsHelper
                 .GetSection(Constants.CiscoOptionsConfigName)
                 .Get<CiscoOptionsFromConfig>();
 
-        if (ciscoOptionsFromConfig == null) 
+        if (ciscoOptionsFromConfig == null)
             throw new Exception("Could not find Cisco Options in configuration file");
 
         var ciscoToken = ciscoOptionsFromConfig.CiscoToken ??

@@ -12,10 +12,10 @@ public class CiscoOptions
                 ? throw new ArgumentException("Cisco Token cannot be null or empty")
                 : ciscoToken;
 
-        ServiceName = 
+        ServiceName =
             serviceName ?? Constants.DefaultServiceName;
 
-        exporterOptions ??= 
+        exporterOptions ??=
             new List<ExporterOptions>();
 
         if (!exporterOptions.Any())
