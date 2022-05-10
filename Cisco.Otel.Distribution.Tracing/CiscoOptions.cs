@@ -32,9 +32,9 @@ public class CiscoOptions
     {
         const string authenticationPrefix = "Bearer";
 
-        return 
-            token.StartsWith(authenticationPrefix) 
-                ? token 
+        return
+            token.StartsWith(authenticationPrefix)
+                ? token
                 : string.Join(" ", authenticationPrefix, token);
     }
 }
