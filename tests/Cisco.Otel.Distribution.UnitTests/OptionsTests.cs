@@ -11,9 +11,9 @@ public class OptionsTests
     [Test]
     public void OptionsDefaultsTest()
     {
-        var ciscoToken = "my-cisco-token";
-        var options = new CiscoOptions(ciscoToken);
+        var options = new CiscoOptions("Bearer my-cisco-token");
 
+        Assert.AreEqual("Bearer my-cisco-token", options.CiscoToken);
         Assert.AreEqual(Constants.DefaultServiceName, options.ServiceName);
         Assert.IsTrue(options.ExporterOptions.Any());
         Assert.AreEqual(1, options.ExporterOptions.Count());
