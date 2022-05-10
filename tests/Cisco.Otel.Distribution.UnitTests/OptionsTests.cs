@@ -46,7 +46,7 @@ public class OptionsTests
 
         var options = CiscoOptionsHelper.FromConfiguration(configuration);
 
-        Assert.AreEqual("my-cisco-token", options.CiscoToken);
+        Assert.AreEqual("Bearer my-cisco-token", options.CiscoToken);
         Assert.AreEqual("test-application", options.ServiceName);
         Assert.IsTrue(options.ExporterOptions.Any());
         Assert.AreEqual(1, options.ExporterOptions.Count());
