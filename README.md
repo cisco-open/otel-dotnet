@@ -91,7 +91,7 @@ collector.yaml ...
 
 exporters:
   otlphttp:
-    traces_endpoint: https://production.cisco-udp.com/trace-collector:80
+    traces_endpoint: https://production.cisco-udp.com/trace-collector
     headers:
       authorization: <Your Telescope Token>
     compression: gzip
