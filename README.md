@@ -74,7 +74,7 @@ using Cisco.Otel.Distribution.Tracing;
 
 var options =
     new CiscoOptions(
-        "cisco-token",
+        "telescope-token",
         "my-app-name",
         new ExporterOptions[]
         {
@@ -109,7 +109,16 @@ service:
 > [Cisco Telescope](https://console.telescope.app/?utm_source=github). supports native OpenTelemetery traces.
 
 ```c#
-//TODO
+var tracerProvider = 
+    Sdk.CreateTracerProviderBuilder()
+        .SetResourceBuilder(ResourceBuilder.CreateDefault())
+        .AddOtlpExporter(options =>
+        {
+            options.Protocol = OtlpExportProtocol.HttpProtobuf;
+            options.Endpoint = new Uri("https://production.cisco-udp.com/trace-collector");
+            options.Headers = $"authorization=Your Telescope Token";
+        })
+        .Build();
 ```
 
 ## Supported Runtimes
@@ -121,15 +130,18 @@ service:
 | .NET `5.0`                        | ✅        |
 | .NET `6.0`                        | ✅        |
 
-## Frameworks
-
-> TODO
-
 ## Supported Libraries
 
-> TODO
-
 Cisco OpenTelemetry .NET Distribution provides out-of-the-box instrumentation (tracing) and advanced **payload collections** for many popular frameworks and libraries.
+
+
+| Library         | Supported |
+|-----------------| --------- |
+| HTTP Client     | ✅        |
+| Grpc.Net Client | ✅        |
+| SQL Client      | ✅        |
+| ASP.NET Core    | ✅        |
+| ASP.NET         | ✅        |
 
 ## Configuration
 
@@ -148,12 +160,7 @@ Exporter options:
 | CiscoOptions.ExporterOptions.Type              | OTEL_EXPORTER_TYPE      | string              | `otlp-grpc`                                           | The exporter type to use. Multiple exporter options available via IConfiguration instances and Init function. See example below |
 
 
-To configure options from environment variables:
-```c#
-var options = CiscoOptionsHelper.FromEnvironmentVariables();
-```
-
-From IConfiguration instances (eg via appsettings.json):
+To configure options from IConfiguration instances (eg via appsettings.json):
 ```c#
 var configuration = 
     new ConfigurationBuilder()
