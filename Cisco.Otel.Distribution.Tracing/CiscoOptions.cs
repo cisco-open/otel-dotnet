@@ -10,7 +10,7 @@ public class CiscoOptions
         CiscoToken =
             string.IsNullOrEmpty(ciscoToken)
                 ? throw new ArgumentException("Cisco Token cannot be null or empty")
-                : ciscoToken;
+                : VerifyToken(ciscoToken);
 
         ServiceName =
             serviceName ?? Constants.DefaultServiceName;
@@ -27,4 +27,14 @@ public class CiscoOptions
     public string ServiceName { get; }
     public string CiscoToken { get; }
     public IEnumerable<ExporterOptions> ExporterOptions { get; }
+
+    private static string VerifyToken(string token)
+    {
+        const string authenticationPrefix = "Bearer";
+
+        return
+            token.StartsWith(authenticationPrefix)
+                ? token
+                : string.Join(" ", authenticationPrefix, token);
+    }
 }
