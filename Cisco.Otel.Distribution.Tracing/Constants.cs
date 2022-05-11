@@ -2,7 +2,7 @@ namespace Cisco.Otel.Distribution.Tracing;
 
 public static class Constants
 {
-    public const string TokenHeader = "x-epsagon-token";
+    public const string TokenHeader = "authorization";
 
     public const string HttpExporterType = "otlp-http";
     public const string GrpcExporterType = "otlp-grpc";
