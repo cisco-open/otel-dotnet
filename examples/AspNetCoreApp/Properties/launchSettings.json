@@ -20,8 +20,7 @@
         "CISCO_TOKEN": "my-cisco-token",
         "OTEL_SERVICE_NAME": "test-dotnet-e2e",
         "OTEL_EXPORTER_OTLP_ENDPOINT": "http://localhost:4317/",
-        "OTEL_EXPORTER_OTLP_PROTOCOL": "grpc",
-        "OTEL_EXPORTER_OTLP_HEADERS": "authorization=BEARER eps_Xih1gMr8qDjXOZoHZUDgo4PMzXICfUxGMcyIJ1jcfJY"
+        "OTEL_EXPORTER_OTLP_PROTOCOL": "grpc"
       }
     },
     "IIS Express": {
