@@ -1,5 +1,8 @@
 # otel-dotnet
 
+[![Nuget](https://img.shields.io/nuget/v/Cisco.Telescope)](https://www.nuget.org/profiles/Epsagon)
+[![NuGet](https://img.shields.io/nuget/dt/Cisco.Telescope)](https://www.nuget.org/profiles/Epsagon)
+
 This package provides OpenTelemetry-compliant tracing to .NET applications for the collection of distributed tracing and performance metrics in [Cisco Telescope](https://console.telescope.app/?utm_source=github).
 
 ## Contents
