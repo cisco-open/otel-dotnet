@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 env:
-  PROJECT_PATH: src/Cisco.Otel.Distribution.Tracing/Cisco.Otel.Distribution.Tracing.csproj
+  PROJECT_PATH: Cisco.Otel.Distribution.Tracing/Cisco.Otel.Distribution.Tracing.csproj
   PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}/output
   NUGET_SOURCE_URL: https://api.nuget.org/v3/index.json
   

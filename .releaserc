@@ -1,5 +1,5 @@
 {
-  "branch": "main",
+  "branches": ["main"],
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
@@ -10,8 +10,8 @@
         "assets": ["src/**/*.csproj"],
         "message": "chore(release): ${nextRelease.version} [skip ci]" 
     }],
-    ["@semantic-release/exec", { 
-        "prepareCmd": "../updateVersion.sh '${nextRelease.version}' 'Cisco.Otel.Distribution.Tracing.csproj'"
+    ["@semantic-release/exec", {
+        "prepareCmd": "updateVersion.sh '${nextRelease.version}' 'Cisco.Otel.Distribution.Tracing/Cisco.Otel.Distribution.Tracing.csproj'"
     }]
   ]
 }
