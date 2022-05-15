@@ -7,20 +7,23 @@ This package provides OpenTelemetry-compliant tracing to .NET applications for t
 
 ## Contents
 
-- [Installation](#installation)
-    - [Install Packages](#install-packages)
+- [otel-dotnet](#otel-dotnet)
+  - [Contents](#contents)
+  - [Installation](#installation)
+    - [Install packages](#install-packages)
     - [Library initialization](#library-initialization)
-        - [.NET Core](#.NET-core)
-        - [.NET](#.NET)
+      - [.NET Core](#net-core)
+      - [.NET](#net)
     - [OpenTelemetry Collector Configuration](#opentelemetry-collector-configuration)
+      - [Configure custom trace exporter](#configure-custom-trace-exporter)
+      - [Configure custom OpenTelemetry collector to export trace data to Cisco Telescope's external collector.](#configure-custom-opentelemetry-collector-to-export-trace-data-to-cisco-telescopes-external-collector)
     - [Existing OpenTelemetry Instrumentation](#existing-opentelemetry-instrumentation)
-- [Supported Runtimes](#supported-runtimes)
-- [Frameworks](#frameworks)
-- [Supported Libraries](#supported-libraries)
-- [Configuration](#configuration)
-- [Getting Help](#getting-help)
-- [Opening Issues](#opening-issues)
-- [License](#license)
+  - [Supported Runtimes](#supported-runtimes)
+  - [Supported Libraries](#supported-libraries)
+  - [Configuration](#configuration)
+  - [Getting Help](#getting-help)
+  - [Opening Issues](#opening-issues)
+  - [License](#license)
 
 ## Installation
 
@@ -29,7 +32,7 @@ This package provides OpenTelemetry-compliant tracing to .NET applications for t
 To install Cisco OpenTelemetry Distribution simply run:
 
 ```sh
-dotnet add package Cisco.Otel.Distribution
+dotnet add package Cisco.Telescope
 ```
 
 ### Library initialization
@@ -177,7 +180,7 @@ var options = CiscoOptionsHelper.FromConfiguration(configuration);
 
 If you have any issue around using the library or the product, please don't hesitate to:
 
-- Use the [documentation](https://docs.telescope.com).
+- Use the [documentation](https://docs.telescope.app).
 - Use the help widget inside the product.
 - Open an issue in GitHub.
 
