@@ -1,4 +1,4 @@
-name: Build and Test
+name: Continuous Integration
 
 on: push
 
@@ -27,6 +27,8 @@ jobs:
       - name: Run Tests with Coverage
         run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
         
-        #      - name: Codecov
-        #        uses: codecov/codecov-action@master
+      - name: Codecov
+        uses: codecov/codecov-action@master
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
         
