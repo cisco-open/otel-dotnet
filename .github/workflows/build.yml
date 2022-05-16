@@ -29,4 +29,6 @@ jobs:
         
       - name: Codecov
         uses: codecov/codecov-action@master
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
         
