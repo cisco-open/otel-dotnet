@@ -34,7 +34,9 @@ dotnet add package Cisco.Telescope
 
 ### Library initialization
 
-> Cisco OpenTelemetry Distribution is activated and instruments the supported libraries once the module is imported.
+Cisco OpenTelemetry Distribution is activated and instruments the supported libraries once the `ciscoTracing.init()` has returned.
+
+To initialize the library, you'll need a cisco-token, which is taken from your [Account tab on the Telescope console Settings page](https://console.telescope.app/settings/account).
 
 #### .NET Core
 
@@ -64,20 +66,20 @@ Tracer.Init(options);
 
 ### OpenTelemetry Collector Configuration
 
-> By default, Cisco OpenTelemetry Distribution exports data directly to [Cisco Telescope's](https://console.telescope.app/?utm_source=github) infrastructure backend.
-> **Existing** OpenTelemetery Collector is supported, the following configuration can be applied
+By default, Cisco OpenTelemetry Distribution exports data directly to [Cisco Telescope's](https://console.telescope.app/?utm_source=github) infrastructure backend.
+**Existing** OpenTelemetery Collector is supported, the following configuration can be applied
 
 #### Configure custom trace exporter
 
-> Cisco OpenTelemetry Distribution supports configure multiple custom exporters.
-> Example for create OtlpGrpc Span exporter to local OpenTelemetry collector:
+Cisco OpenTelemetry Distribution supports configure multiple custom exporters. Note that you will need to handle your exporter authorization.
+Example for create OtlpGrpc Span exporter to local OpenTelemetry collector:
 
 ```c#
 using Cisco.Otel.Distribution.Tracing;
 
 var options =
     new CiscoOptions(
-        "telescope-token",
+        "cisco-token",
         "my-app-name",
         new ExporterOptions[]
         {
@@ -109,7 +111,7 @@ service:
 ### Existing OpenTelemetry Instrumentation
 
 > Notice: Only relevant if interested in streaming existing OpenTelemetry workloads.
-> [Cisco Telescope](https://console.telescope.app/?utm_source=github). supports native OpenTelemetery traces.
+> [Cisco Telescope](https://console.telescope.app/?utm_source=github) supports native OpenTelemetery traces.
 
 ```c#
 var tracerProvider = 
