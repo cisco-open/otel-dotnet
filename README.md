@@ -5,6 +5,8 @@
 [![Coverage][coverage-image]][coverage-url]
 [![Continuous Integration][ci-image]][ci-url]
 
+![Trace](trace.png)
+
 This package provides OpenTelemetry-compliant tracing to .NET applications for the collection of distributed tracing and performance metrics in [Cisco Telescope](https://console.telescope.app/?utm_source=github).
 
 ## Contents
