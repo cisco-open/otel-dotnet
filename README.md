@@ -1,8 +1,11 @@
 # otel-dotnet
 
-[![Coverage](https://img.shields.io/codecov/c/github/cisco-open/otel-dotnet)](https://codecov.io/gh/cisco-open/otel-dotnet/branch/main/)
-[![Nuget](https://img.shields.io/nuget/v/Cisco.Telescope)](https://www.nuget.org/packages/Cisco.Telescope/)
-[![NuGet](https://img.shields.io/nuget/dt/Cisco.Telescope)](https://www.nuget.org/packages/Cisco.Telescope/)
+[![Nuget][nuget-image]][nuget-url]
+[![Apache License][license-image]][license-image]
+[![Coverage][coverage-image]][coverage-url]
+[![Continuous Integration][ci-image]][ci-url]
+
+![Trace](trace.png)
 
 This package provides OpenTelemetry-compliant tracing to .NET applications for the collection of distributed tracing and performance metrics in [Cisco Telescope](https://console.telescope.app/?utm_source=github).
 
@@ -203,3 +206,12 @@ For help and questions about [Cisco Telescope](https://console.telescope.app/?ut
 Provided under the Apache 2.0. See LICENSE for details.
 
 Copyright 2022, Cisco
+
+[nuget-url]: https://www.nuget.org/packages/Cisco.Telescope/
+[nuget-image]: https://img.shields.io/nuget/v/Cisco.Telescope?style=for-the-badge
+[license-url]: https://github.com/cisco-open/otel-dotnet/blob/main/LICENSE
+[license-image]: https://img.shields.io/badge/license-Apache_2.0-green.svg?style=for-the-badge
+[coverage-url]: https://codecov.io/gh/cisco-open/otel-dotnet/branch/main/
+[coverage-image]: https://img.shields.io/codecov/c/github/cisco-open/otel-dotnet?style=for-the-badge
+[ci-url]: https://github.com/cisco-open/otel-dotnet/actions/workflows/build.yml
+[ci-image]: https://img.shields.io/github/workflow/status/cisco-open/otel-dotnet/Continuous%20Integration?style=for-the-badge
