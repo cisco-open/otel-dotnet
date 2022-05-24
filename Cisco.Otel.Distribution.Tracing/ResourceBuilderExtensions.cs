@@ -13,17 +13,17 @@ internal static class ResourceBuilderExtensions
                 new("cisco.sdk.version", GetFileVersion()),
             });
     }
-    
+
     private static string GetFileVersion()
     {
         var version = typeof(ResourceBuilderExtensions)
             .Assembly
             .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
             .InformationalVersion;
-        
+
         var hashIndex = version.IndexOf("+", StringComparison.Ordinal);
-        
-        return hashIndex > 0 
+
+        return hashIndex > 0
             ? version.Substring(0, hashIndex)
             : version;
     }
