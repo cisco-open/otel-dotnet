@@ -10,11 +10,11 @@ internal static class ResourceBuilderExtensions
         return builder
             .AddAttributes(new List<KeyValuePair<string, object>>
             {
-                new("cisco.sdk.version", GetFileVersion()),
+                new("cisco.sdk.version", GetSdkVersion()),
             });
     }
     
-    private static string GetFileVersion()
+    private static string GetSdkVersion()
     {
         var version = typeof(ResourceBuilderExtensions)
             .Assembly
