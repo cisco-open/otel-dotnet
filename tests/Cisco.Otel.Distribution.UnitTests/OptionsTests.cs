@@ -17,7 +17,7 @@ public class OptionsTests
         Assert.AreEqual(Constants.DefaultServiceName, options.ServiceName);
         Assert.IsTrue(options.ExporterOptions.Any());
         Assert.AreEqual(1, options.ExporterOptions.Count());
-        Assert.IsTrue(options.ExporterOptions.First() is ExporterOptions.OtlpGrpc);
+        Assert.IsTrue(options.ExporterOptions.First() is ExporterOptions.OtlpHttp);
     }
 
     [Test]
