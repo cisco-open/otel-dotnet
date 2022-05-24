@@ -9,13 +9,13 @@ public static class Constants
     public const string ConsoleExporterType = "console";
 
     public const string DefaultServiceName = "application";
-    public const string DefaultExporterType = GrpcExporterType;
+    public const string DefaultCollectorEndpoint = "https://production.cisco-udp.com/trace-collector";
 
     public const string CiscoOptionsConfigName = "CiscoOptions";
 
     public const string CiscoTokenEnvVarName = "CISCO_TOKEN";
+    
+    public const string DefaultSdkVersion = "version not supported";
 
-    // public const string ServiceNameEnvironmentVariableName = "OTEL_SERVICE_NAME";
-    // public const string CollectorEndpointEnvironmentVariableName = "OTEL_COLLECTOR_ENDPOINT";
-    // public const string ExporterTypeEnvironmentVariableName = "OTEL_EXPORTER_TYPE";
+
 }
