@@ -1,4 +1,5 @@
 using System.Reflection;
+using Cisco.Opentelemetry.Specifications.Consts;
 using OpenTelemetry.Resources;
 
 namespace Cisco.Otel.Distribution.Tracing;
@@ -10,7 +11,7 @@ internal static class ResourceBuilderExtensions
         return builder
             .AddAttributes(new List<KeyValuePair<string, object>>
             {
-                new("telescope.sdk.version", GetSdkVersion()),
+                new(Consts.CISCO_SDK_VERSION, GetSdkVersion()),
             });
     }
 

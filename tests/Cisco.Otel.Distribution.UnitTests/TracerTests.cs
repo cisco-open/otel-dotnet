@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Cisco.Opentelemetry.Specifications.Consts;
 using NUnit.Framework;
 using Cisco.Otel.Distribution.Tracing;
 using OpenTelemetry;
@@ -47,7 +48,7 @@ public class TracerTests
         var sdkVersion =
             resource
                 .Attributes
-                .First(a => a.Key == "telescope.sdk.version")
+                .First(a => a.Key == Consts.CISCO_SDK_VERSION)
                 .Value;
 
         Assert.AreEqual("0.1.0", sdkVersion);
