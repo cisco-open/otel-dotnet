@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using NUnit.Framework;
 using Cisco.Otel.Distribution.Tracing;
+using OpenTelemetry;
 
 namespace Cisco.Otel.Distribution.UnitTests;
 
@@ -32,5 +33,23 @@ public class TracerTests
 
         Assert.AreEqual(1, exportedItems.Count);
         Assert.AreEqual("HappyPathSpan", exportedItems.First().DisplayName);
+    }
+
+    [Test]
+    public void ResourceSdkVersionTest()
+    {
+        var options = new CiscoOptions("my-cisco-token");
+
+        var tracerProvider = Tracer.Init(options);
+
+        var resource = tracerProvider.GetResource();
+
+        var sdkVersion =
+            resource
+                .Attributes
+                .First(a => a.Key == "cisco.sdk.version")
+                .Value;
+
+        Assert.AreEqual("0.1.0", sdkVersion);
     }
 }

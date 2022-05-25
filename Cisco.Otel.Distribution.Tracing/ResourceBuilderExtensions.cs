@@ -10,21 +10,25 @@ internal static class ResourceBuilderExtensions
         return builder
             .AddAttributes(new List<KeyValuePair<string, object>>
             {
-                new("cisco.sdk.version", GetFileVersion()),
+                new("cisco.sdk.version", GetSdkVersion()),
             });
     }
 
-    private static string GetFileVersion()
+    private static string GetSdkVersion()
     {
-        var version = typeof(ResourceBuilderExtensions)
-            .Assembly
-            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-            .InformationalVersion;
+        try
+        {
+            var version = 
+                Assembly
+                    .GetExecutingAssembly()
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                    .InformationalVersion;
 
-        var hashIndex = version.IndexOf("+", StringComparison.Ordinal);
-
-        return hashIndex > 0
-            ? version.Substring(0, hashIndex)
-            : version;
+            return version;
+        }
+        catch (Exception)
+        {
+            return Constants.DefaultSdkVersion;
+        }
     }
 }
