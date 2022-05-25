@@ -18,7 +18,7 @@ internal static class ResourceBuilderExtensions
     {
         try
         {
-            var version = 
+            var version =
                 Assembly
                     .GetExecutingAssembly()
                     .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
