@@ -47,7 +47,7 @@ public class TracerTests
         var sdkVersion =
             resource
                 .Attributes
-                .First(a => a.Key == "cisco.sdk.version")
+                .First(a => a.Key == "telescope.sdk.version")
                 .Value;
 
         Assert.AreEqual("0.1.0", sdkVersion);

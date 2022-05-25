@@ -10,7 +10,7 @@ internal static class ResourceBuilderExtensions
         return builder
             .AddAttributes(new List<KeyValuePair<string, object>>
             {
-                new("cisco.sdk.version", GetSdkVersion()),
+                new("telescope.sdk.version", GetSdkVersion()),
             });
     }
 
