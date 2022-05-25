@@ -1,7 +1,8 @@
-using System;
+﻿using System;
 using System.Linq;
 using NUnit.Framework;
 using Cisco.Otel.Distribution.Tracing;
+using Cisco.Opentelemetry.Specifications.Consts;
 using Microsoft.Extensions.Configuration;
 
 namespace Cisco.Otel.Distribution.UnitTests;
@@ -18,6 +19,9 @@ public class OptionsTests
         Assert.IsTrue(options.ExporterOptions.Any());
         Assert.AreEqual(1, options.ExporterOptions.Count());
         Assert.IsTrue(options.ExporterOptions.First() is ExporterOptions.OtlpGrpc);
+        Assert.AreEqual(Consts.DEFAULT_CISCO_DEBUG, options.Debug);
+        Assert.AreEqual(Consts.DEFAULT_PAYLOADS_ENABLED, options.PayloadsEnabled);
+        Assert.AreEqual(Consts.DEFAULT_MAX_PAYLOAD_SIZE, options.MaxPayloadSize);
     }
 
     [Test]
