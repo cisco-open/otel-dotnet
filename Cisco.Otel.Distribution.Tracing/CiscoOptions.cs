@@ -19,7 +19,7 @@ public class CiscoOptions
             new List<ExporterOptions>();
 
         if (!exporterOptions.Any())
-            exporterOptions.Add(new ExporterOptions.OtlpGrpc());
+            exporterOptions.Add(new ExporterOptions.OtlpHttp(Constants.DefaultCollectorEndpoint));
 
         ExporterOptions = exporterOptions;
     }

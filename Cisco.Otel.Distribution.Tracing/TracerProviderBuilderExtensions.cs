@@ -16,8 +16,8 @@ public static class TracerProviderBuilderExtensions
             .SetResourceBuilder(
                 ResourceBuilder
                     .CreateDefault()
-                    .AddEnvironmentVariableDetector()
-                    .AddTelemetrySdk())
+                    .AddTelemetrySdk()
+                    .AddCiscoVersion())
             .AddOtlpExporter(options => options.Headers = $"{Constants.TokenHeader}={ciscoToken}");
 
         builder.AddInstrumentation();
@@ -37,11 +37,22 @@ public static class TracerProviderBuilderExtensions
             .AddSource(options.ServiceName)
             .SetResourceBuilder(
                 ResourceBuilder
-                    .CreateDefault()
+                    .CreateEmpty()
                     .AddService(options.ServiceName)
-                    .AddTelemetrySdk());
+                    .AddTelemetrySdk()
+                    .AddCiscoVersion())
+            .AddExporters(options.ExporterOptions, options.CiscoToken)
+            .AddInstrumentation();
 
-        foreach (var exporterOption in options.ExporterOptions)
+        return builder;
+    }
+
+    private static TracerProviderBuilder AddExporters(
+        this TracerProviderBuilder builder,
+        IEnumerable<ExporterOptions> exporterOptions,
+        string ciscoToken)
+    {
+        foreach (var exporterOption in exporterOptions)
         {
             switch (exporterOption)
             {
@@ -60,7 +71,7 @@ public static class TracerProviderBuilderExtensions
                         }
 
                         opts.Protocol = OtlpExportProtocol.Grpc;
-                        opts.Headers = $"{Constants.TokenHeader}={options.CiscoToken}";
+                        opts.Headers = $"{Constants.TokenHeader}={ciscoToken}";
                     });
                     break;
                 case ExporterOptions.OtlpHttp oltpHttp:
@@ -72,15 +83,13 @@ public static class TracerProviderBuilderExtensions
                         }
 
                         opts.Protocol = OtlpExportProtocol.HttpProtobuf;
-                        opts.Headers = $"{Constants.TokenHeader}={options.CiscoToken}";
+                        opts.Headers = $"{Constants.TokenHeader}={ciscoToken}";
                     });
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(exporterOption));
             }
         }
-
-        builder.AddInstrumentation();
 
         return builder;
     }
