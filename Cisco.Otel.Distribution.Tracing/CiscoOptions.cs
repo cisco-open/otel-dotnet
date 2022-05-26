@@ -1,17 +1,16 @@
 ﻿using Cisco.Opentelemetry.Specifications.Consts;
 
-
 namespace Cisco.Otel.Distribution.Tracing;
 
 public class CiscoOptions
 {
     public CiscoOptions(
         string ciscoToken,
-        string? serviceName = null, 
-        ICollection<ExporterOptions>? exporterOptions = null,
+        string? serviceName = null,
         bool? debug = null,
         bool? payloadsEnabled = null,
-        int? maxPayloadSize = null)
+        int? maxPayloadSize = null,
+        ICollection<ExporterOptions>? exporterOptions = null)
     {
         CiscoToken =
             string.IsNullOrEmpty(ciscoToken)

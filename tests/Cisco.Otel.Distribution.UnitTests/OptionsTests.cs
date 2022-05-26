@@ -52,6 +52,9 @@ public class OptionsTests
 
         Assert.AreEqual("Bearer my-cisco-token", options.CiscoToken);
         Assert.AreEqual("test-application", options.ServiceName);
+        Assert.AreEqual(true, options.Debug);
+        Assert.AreEqual(true, options.PayloadsEnabled);
+        Assert.AreEqual(1023, options.MaxPayloadSize);
         Assert.IsTrue(options.ExporterOptions.Any());
         Assert.AreEqual(1, options.ExporterOptions.Count());
         Assert.IsTrue(options.ExporterOptions.First() is ExporterOptions.OtlpGrpc);

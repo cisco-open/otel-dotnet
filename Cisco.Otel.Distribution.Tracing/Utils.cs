@@ -17,7 +17,6 @@ namespace Cisco.Otel.Distribution.Tracing
                 var converter = TypeDescriptor.GetConverter(typeof(T));
                 if (converter != null)
                 {
-                    // Cast ConvertFromString(string text) : object to (T)
                     return (T)converter.ConvertFromString(variable);
                 }
                 return defaultValue;
