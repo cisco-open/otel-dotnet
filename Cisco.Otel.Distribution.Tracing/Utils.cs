@@ -3,8 +3,8 @@ using System.ComponentModel;
 
 namespace Cisco.Otel.Distribution.Tracing
 {
-	public class Utils
-	{
+    public class Utils
+    {
         public static T ReadFromEnv<T>(string variable, T defaultValue)
         {
             return Convert(Environment.GetEnvironmentVariable(variable), defaultValue);
@@ -26,6 +26,6 @@ namespace Cisco.Otel.Distribution.Tracing
                 return defaultValue;
             }
         }
-	}
+    }
 }
 
