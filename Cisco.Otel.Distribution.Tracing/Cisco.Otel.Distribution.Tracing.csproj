@@ -26,6 +26,7 @@
         <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.2.0-rc4" />
         <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc9.1" />
         <PackageReference Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.0.0-rc9.1" />
+        <PackageReference Include="Cisco.Opentelemetry.Specification" Version="0.0.17" />
     </ItemGroup>
 
     <Choose>
@@ -47,4 +48,7 @@
         <PackageReference Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.0.0-rc9.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Cisco.Opentelemetry.Specification" />
+    </ItemGroup>
 </Project>

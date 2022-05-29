@@ -27,6 +27,9 @@ public static class CiscoOptionsHelper
             new CiscoOptions(
                 ciscoToken,
                 ciscoOptionsFromConfig.ServiceName,
+                ciscoOptionsFromConfig.Debug,
+                ciscoOptionsFromConfig.PayloadsEnabled,
+                ciscoOptionsFromConfig.MaxPayloadSize,
                 exporters);
     }
 
@@ -48,6 +51,9 @@ internal class CiscoOptionsFromConfig
 {
     public string? ServiceName { get; set; }
     public string? CiscoToken { get; set; }
+    public bool? Debug { get; set; }
+    public bool? PayloadsEnabled { get; set; }
+    public int? MaxPayloadSize { get; set; }
     public ExporterOptionsFromConfig[]? ExporterOptions { get; set; }
 }
 
