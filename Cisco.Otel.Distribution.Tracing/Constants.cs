@@ -9,9 +9,11 @@ public static class Constants
     public const string ConsoleExporterType = "console";
 
     public const string DefaultServiceName = "application";
-    public const string DefaultExporterType = GrpcExporterType;
+    public const string DefaultCollectorEndpoint = "https://production.cisco-udp.com/trace-collector";
 
     public const string CiscoOptionsConfigName = "CiscoOptions";
 
     public const string CiscoTokenEnvVarName = "CISCO_TOKEN";
+
+    public const string DefaultSdkVersion = "version not supported";
 }

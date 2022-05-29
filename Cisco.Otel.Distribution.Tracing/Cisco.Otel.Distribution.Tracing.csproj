@@ -19,6 +19,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Cisco.Opentelemetry.Specification" Version="0.0.17" />
         <PackageReference Include="OpenTelemetry" Version="1.2.0-rc4" />
         <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.2.0-rc4" />
         <PackageReference Include="OpenTelemetry.Exporter.InMemory" Version="1.2.0-rc4" />
