@@ -8,22 +8,22 @@ public static class Tracer
 {
     public static TracerProvider Init()
     {
-        var tracerProvider = 
+        var tracerProvider =
             Sdk.CreateTracerProviderBuilder()
                 .AddCiscoTracing()
                 .Build();
-        
+
         PrintTelescopeIsRunning();
         return tracerProvider;
     }
 
     public static TracerProvider Init(CiscoOptions options)
     {
-        var tracerProvider = 
+        var tracerProvider =
             Sdk.CreateTracerProviderBuilder()
             .AddCiscoTracing(options)
             .Build();
-    
+
         PrintTelescopeIsRunning();
         return tracerProvider;
     }
