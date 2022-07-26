@@ -36,6 +36,7 @@ public static class ServiceCollectionExtensions
                 action.Invoke(builder);
                 builder.AddAspNetCoreInstrumentation(opts => opts.RecordException = true);
             });
+        Utils.PrintTelescopeIsRunning();
 #endif
         return services;
     }

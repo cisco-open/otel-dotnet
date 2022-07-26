@@ -13,7 +13,7 @@ public static class Tracer
                 .AddCiscoTracing()
                 .Build();
 
-        PrintTelescopeIsRunning();
+        Utils.PrintTelescopeIsRunning();
         return tracerProvider;
     }
 
@@ -24,12 +24,7 @@ public static class Tracer
             .AddCiscoTracing(options)
             .Build();
 
-        PrintTelescopeIsRunning();
+        Utils.PrintTelescopeIsRunning();
         return tracerProvider;
-    }
-
-    private static void PrintTelescopeIsRunning()
-    {
-        Console.WriteLine(Consts.TELESCOPE_IS_RUNNING_MESSAGE);
     }
 }
