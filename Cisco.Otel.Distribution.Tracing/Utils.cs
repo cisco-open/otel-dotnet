@@ -27,7 +27,7 @@ namespace Cisco.Otel.Distribution.Tracing
                 return defaultValue;
             }
         }
-        
+
         public static void PrintTelescopeIsRunning()
         {
             Console.WriteLine(Consts.TELESCOPE_IS_RUNNING_MESSAGE);
