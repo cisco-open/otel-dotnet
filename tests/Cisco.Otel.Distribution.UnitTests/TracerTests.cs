@@ -62,13 +62,13 @@ public class TracerTests
         var originalConsoleWriter = Console.Out;
         var customConsoleWriter = new StringWriter();
         Console.SetOut(customConsoleWriter);
-        
+
         var options = new CiscoOptions("my-cisco-token");
         Tracer.Init(options);
-        
+
         var consoleOutput = customConsoleWriter.ToString();
         Console.SetOut(originalConsoleWriter);
-        
+
         StringAssert.Contains(Consts.TELESCOPE_IS_RUNNING_MESSAGE, consoleOutput);
     }
 }
