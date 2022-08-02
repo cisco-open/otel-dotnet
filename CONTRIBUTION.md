@@ -7,7 +7,7 @@ We'd love your help!
 Make sure you have the following env versions:
 
 ```shell
-.NET 6
+.NET 6.0+
 ```
 
 ### Fork
